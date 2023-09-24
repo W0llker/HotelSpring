@@ -1,6 +1,7 @@
 package repository.hibernate;
 
 import config.ApplicationContext;
+import entity.Hotel;
 import entity.Room;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,6 +44,9 @@ public class RoomHibernate implements RoomDao {
 
     @Override
     public Room findById(Long id) {
-        return null;
+        Session session = sessionFactory.openSession();
+        Room room = session.find(Room.class,id);
+        session.close();
+        return room;
     }
 }
