@@ -45,7 +45,6 @@ public class HotelHibernate implements HotelDao {
     public Hotel findById(Long id) {
         Session session = sessionFactory.openSession();
         Hotel hotel = session.find(Hotel.class,id);
-        session.close();
         return hotel;
     }
 }

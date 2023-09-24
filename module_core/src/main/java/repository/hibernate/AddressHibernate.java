@@ -44,7 +44,6 @@ public class AddressHibernate implements AddressDao {
     public Address findById(Long id) {
         Session session = sessionFactory.openSession();
         Address address = session.find(Address.class,id);
-        session.close();
         return address;
     }
 }

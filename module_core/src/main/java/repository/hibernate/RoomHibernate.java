@@ -46,7 +46,6 @@ public class RoomHibernate implements RoomDao {
     public Room findById(Long id) {
         Session session = sessionFactory.openSession();
         Room room = session.find(Room.class,id);
-        session.close();
         return room;
     }
 }

@@ -47,7 +47,6 @@ public class ClientHibernate implements ClientDao {
     public Client findById(Long id) {
         Session session = sessionFactory.openSession();
         Client client = session.find(Client.class,id);
-        session.close();
         return client;
     }
 }

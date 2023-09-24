@@ -28,8 +28,8 @@ public class Hotel implements Serializable {
     private Integer countRoom;
     private Integer floor;
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.TRUE)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Room> roomList = new HashSet<>();
+    private List<Room> roomList;
 }
