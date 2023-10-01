@@ -6,7 +6,7 @@ import entity.Hotel;
 import mapper.MapperEntity;
 import repository.HotelDao;
 
-public class HotelService implements HotelApi{
+public class HotelService implements HotelApi {
     private final HotelDao hotelDao;
     private final MapperEntity<Hotel, HotelRequest, HotelResponse> mapper;
 
@@ -32,6 +32,6 @@ public class HotelService implements HotelApi{
 
     @Override
     public void update(Long id, HotelRequest hotelRequest) {
-        hotelDao.update(id,mapper.createEntity(hotelRequest));
+        hotelDao.update(id, mapper.createEntity(hotelRequest));
     }
 }

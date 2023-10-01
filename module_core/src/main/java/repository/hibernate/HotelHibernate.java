@@ -14,10 +14,10 @@ public class HotelHibernate implements HotelDao {
     }
 
     @Override
-    public void add(Hotel Hotel) {
+    public void add(Hotel hotel) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
-        session.persist(Hotel);
+        session.persist(hotel);
         session.getTransaction().commit();
         session.close();
     }
