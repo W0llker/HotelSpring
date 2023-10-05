@@ -18,7 +18,8 @@ import java.util.*;
 @Table(schema = "hotel", name = "hotel")
 public class Hotel {
     @Id
-    @GeneratedValue(generator = "ID_GENERATOR")
+    @SequenceGenerator(name = "hotel_sq",sequenceName ="sq_hotel",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="hotel_sq")
     private Long id;
     private String name;
     private Address address;
@@ -33,10 +34,10 @@ public class Hotel {
     @LazyCollection(LazyCollectionOption.TRUE)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List <FeedBack> feedBacks;
+    private List <FeedBack> feedBacks = new ArrayList<>();
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.TRUE)
-    private List<Amenities> amenitiesList;
+    private List<Amenities> amenitiesList = new ArrayList<>();
     @OneToMany(mappedBy = "hotel")
     @LazyCollection(LazyCollectionOption.TRUE)
     @EqualsAndHashCode.Exclude

@@ -9,6 +9,10 @@ import org.hibernate.SessionFactory;
 import repository.AmenitiesDao;
 
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class AmenitiesHibernate implements AmenitiesDao {
@@ -21,7 +25,7 @@ public class AmenitiesHibernate implements AmenitiesDao {
     @Override
     public void addAmenities(Long idHotel, Amenities amenities) {
         Session session = sessionFactory.openSession();
-        session.beginTransaction().begin();
+        session.beginTransaction();
         Hotel hotel = session.get(Hotel.class,idHotel);
         hotel.getAmenitiesList().add(amenities);
         amenities.setHotel(hotel);
@@ -61,8 +65,11 @@ public class AmenitiesHibernate implements AmenitiesDao {
     @Override
     public List<Amenities> getAmenities(Long idHotel) {
         Session session = sessionFactory.openSession();
-        Query query = session.createQuery("select a from Amenities a where a.hotel.id=:id");
-        query.setParameter("id",idHotel);
-        return query.getResultList();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Amenities> query = cb.createQuery(Amenities.class);
+        Root<Amenities> root = query.from(Amenities.class);
+        Join<Hotel,Amenities> join = root.join("hotel");
+        query.where(cb.equal(join.get("id"),idHotel));
+        return session.createQuery(query).getResultList();
     }
 }

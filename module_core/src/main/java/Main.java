@@ -1,10 +1,8 @@
 
 import entity.*;
 
-import repository.HotelDao;
-import repository.PersonDao;
-import repository.hibernate.HotelHibernate;
-import repository.hibernate.PersonHibernate;
+import repository.*;
+import repository.hibernate.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,33 +10,6 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Address address = new Address();
-        address.setCity("Гомель");
-        address.setCountry("Беларусь");
-        address.setStreet("Тамтам");
-        address.setPostalCode("2025");
-
-        Client client = new Client();
-        client.setName("Никита");
-        client.setLogin("Wolker");
-        client.setSurName("Вдовенков");
-        client.setPassword("1234");
-        client.setClientStatus(ClientStatus.NORMAL);
-        client.setMoneySpent(new BigDecimal(500));
-        client.setDateOfBirth(LocalDate.now());
-        client.setAddress(address);
-
-//        HotelDao hotelDao = new HotelHibernate();
-//        Hotel hotel = new Hotel();
-//        hotel.setName("Гомельскай гостиница");
-//        hotel.setFloor(3);
-//        hotel.setCountRoom(20);
-//        hotel.setAddress(address);
-//        Hotel hotel1 = hotelDao.findById(36l);
-//        System.out.println(hotel1.getRoomList());
-//        hotelDao.add(hotel);
-//        hotelDao.delete(30l);
-
 //        RoomRequest roomRequest = new RoomRequest();
 //        roomRequest.setNumber("20А");
 //        roomRequest.setSize(2);
@@ -57,16 +28,53 @@ public class Main {
 //        clientDao.delete(16l);
 //        User client1 = clientDao.findById(16l);
 //        System.out.println(client1);
+
+//        addClient();
+//        ClientDao clientDao = new ClientHibernate();
+//        System.out.println(clientDao.findById(1l));
+//        System.out.println(clientDao.getAllClientStatus(ClientStatus.STANDART));
+
+
 //        addHotel();
 //        addPerson();
-        PersonDao personDao = new PersonHibernate();
-        System.out.println(personDao.findPersonNameAndSurName(9l,"Никита","Вдовенков"));
+//        addHotel();
+//        addFeedBack();
+
+
+        FeedBackDao feedBackDao = new FeedBackHibernate();
+        System.out.println(feedBackDao.getFeedBackInHotel(1l));
+//        System.out.println(feedBackDao.getFeedBackInHotelStars(1l,3));
+
+
+//        addAmenities();
+        AmenitiesDao amenitiesDao = new AmenitiesHibernate();
+        System.out.println(amenitiesDao.getAmenities(1l));
+
+
+//        PersonDao personDao = new PersonHibernate();
+//        System.out.println(personDao.findPersonNameAndSurName(9l,"Никита","Вдовенков"));
 //        System.out.println(personDao.getPerson(9l));
 //        System.out.println(personDao.getPersonPost(9l,Post.Manager));
     }
 
     private static void addClient() {
+        ClientDao clientDao = new ClientHibernate();
+        Address address = new Address();
+        address.setCity("Гомель");
+        address.setCountry("Беларусь");
+        address.setStreet("Тамтам");
+        address.setPostalCode("2025");
 
+        Client client = new Client();
+        client.setName("Никита");
+        client.setLogin("Wolker");
+        client.setSurName("Вдовенков");
+        client.setPassword("1234");
+        client.setClientStatus(ClientStatus.NORMAL);
+        client.setMoneySpent(new BigDecimal(500));
+        client.setDateOfBirth(LocalDate.now());
+        client.setAddress(address);
+        clientDao.add(client);
     }
 
     private static void addHotel() {
@@ -89,14 +97,28 @@ public class Main {
         Person person = new Person();
         person.setName("Никита");
         person.setSurName("Вдовенков");
-        person.setPost(Post.Manager);
+        person.setPost(Post.MANAGER);
         person.setSalary(new BigDecimal(500));
         person.setDateStart(LocalDate.now());
         person.setDateEnd(null);
         personDao.addPerson(9l,person);
         return person;
     }
-
+    private static void addFeedBack() {
+        FeedBackDao feedBackDao = new FeedBackHibernate();
+        FeedBack feedBack = new FeedBack();
+        feedBack.setStars(2);
+        feedBack.setComment("Относительно неплохой отель");
+        feedBackDao.add(1l,feedBack);
+    }
+    private static void addAmenities() {
+        AmenitiesDao amenitiesDao = new AmenitiesHibernate();
+        Amenities amenities = new Amenities();
+        amenities.setName("Бассей");
+        amenities.setType(AmenitiesType.BATHROOM);
+        amenities.setPrice(new BigDecimal(500));
+        amenitiesDao.addAmenities(1l,amenities);
+    }
     private static void addAdministration() {
 
     }

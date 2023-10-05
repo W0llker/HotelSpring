@@ -2,9 +2,17 @@ package repository.hibernate;
 
 import config.ApplicationContext;
 import entity.Client;
+import entity.ClientStatus;
+import entity.Room;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import repository.ClientDao;
+
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 public class ClientHibernate implements ClientDao {
     private final SessionFactory sessionFactory;
@@ -44,7 +52,26 @@ public class ClientHibernate implements ClientDao {
     @Override
     public Client findById(Long id) {
         Session session = sessionFactory.openSession();
-        Client client = session.find(Client.class,id);
-        return client;
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Client> criteriaQuery = cb.createQuery(Client.class);
+        Root<Client> root = criteriaQuery.from(Client.class);
+        criteriaQuery.select(root).where(cb.equal(
+                root.get("id"),cb.parameter(Long.class,"id")));
+        TypedQuery<Client>  clientTypedQuery = session.createQuery(criteriaQuery)
+                .setParameter("id",id);
+        return clientTypedQuery.getSingleResult();
+    }
+
+    @Override
+    public List<Client> getAllClientStatus(ClientStatus clientStatus) {
+        Session session = sessionFactory.openSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Client> criteriaQuery = cb.createQuery(Client.class);
+        Root<Client> root = criteriaQuery.from(Client.class);
+        criteriaQuery.select(root).where(cb.equal(
+                root.get("clientStatus"),cb.parameter(ClientStatus.class,"status")));
+        TypedQuery<Client>  clientTypedQuery = session.createQuery(criteriaQuery)
+                .setParameter("status",clientStatus);
+        return clientTypedQuery.getResultList();
     }
 }

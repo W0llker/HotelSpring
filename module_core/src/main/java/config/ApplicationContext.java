@@ -31,6 +31,7 @@ public class ApplicationContext {
         configuration.addAnnotatedClass(Room.class);
         configuration.addAnnotatedClass(FeedBack.class);
         configuration.addAnnotatedClass(Person.class);
+        configuration.addAnnotatedClass(OrderHotel.class);
         configuration.addAnnotatedClass(Amenities.class);
         configuration.addAnnotatedClass(Administrative.class);
         service = new StandardServiceRegistryBuilder();

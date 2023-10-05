@@ -15,7 +15,8 @@ import java.math.BigDecimal;
 @Table(schema = "hotel", name = "room")
 public class Room {
     @Id
-    @GeneratedValue(generator = "ID_GENERATOR")
+    @SequenceGenerator(name = "room_sq",sequenceName ="sq_room",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="room_sq")
     private Long id;
     private String Number;
     @Enumerated(EnumType.STRING)

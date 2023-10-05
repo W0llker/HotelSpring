@@ -1,8 +1,8 @@
 package entity;
 
 public enum Post {
-    Cook,
-    Manager,
-    Housemaid,
-    Guard
+    COOK,
+    MANAGER,
+    HOUSEMAID,
+    GUARD
 }

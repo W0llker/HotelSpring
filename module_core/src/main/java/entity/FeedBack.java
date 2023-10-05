@@ -12,12 +12,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class FeedBack {
     @Id
-    @GeneratedValue(generator = "ID_GENERATOR")
+    @SequenceGenerator(name = "feedback_sq",sequenceName ="sq_feedback",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="feedback_sq")
     private Long id;
     @ManyToOne
     private Hotel hotel;
-    @ManyToOne
+    @OneToOne
     private Client client;
     private String comment;
-    private Integer start;
+    private Integer stars;
 }
