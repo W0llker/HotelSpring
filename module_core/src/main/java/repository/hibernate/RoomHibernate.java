@@ -3,9 +3,13 @@ package repository.hibernate;
 import config.ApplicationContext;
 import entity.Hotel;
 import entity.Room;
+import entity.RoomType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import repository.RoomDao;
+
+import javax.persistence.Query;
+import java.util.List;
 
 public class RoomHibernate implements RoomDao {
     private final SessionFactory sessionFactory;
@@ -34,7 +38,7 @@ public class RoomHibernate implements RoomDao {
     }
 
     @Override
-    public void update(Long id, Room room) {
+    public void update(Long id,Room room) {
         Session session = sessionFactory.openSession();
         session.getTransaction().begin();
         room.setId(id);
@@ -47,5 +51,14 @@ public class RoomHibernate implements RoomDao {
         Session session = sessionFactory.openSession();
         Room room = session.find(Room.class,id);
         return room;
+    }
+
+    @Override
+    public List<Room> getRoomByType(Long hotelId, RoomType roomType) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("select r from Room r where r.hotel.id=:id and r.roomType=:type");
+        query.setParameter("id",hotelId);
+        query.setParameter("type",roomType);
+        return query.getResultList();
     }
 }

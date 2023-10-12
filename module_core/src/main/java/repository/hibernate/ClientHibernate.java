@@ -1,11 +1,9 @@
 package repository.hibernate;
 
 import config.ApplicationContext;
-import entity.Address;
 import entity.Client;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import repository.AddressDao;
 import repository.ClientDao;
 
 public class ClientHibernate implements ClientDao {
