@@ -1,11 +1,17 @@
 
+import dto.room.RoomRequest;
 import entity.*;
 
+import mapper.RoomMapper;
 import repository.*;
 import repository.hibernate.*;
+import service.RoomService;
 
+import javax.persistence.EntityManagerFactory;
+import javax.transaction.UserTransaction;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class Main {
@@ -38,23 +44,36 @@ public class Main {
 //        addHotel();
 //        addPerson();
 //        addHotel();
+//        addRoom();
+        RoomDao roomDao = new RoomHibernate();
+        System.out.println(roomDao.getRoomByType(1l,RoomType.ONE));
+        System.out.println(roomDao.findById(1l));
 //        addFeedBack();
 
-
-        FeedBackDao feedBackDao = new FeedBackHibernate();
-        System.out.println(feedBackDao.getFeedBackInHotel(1l));
+//        FeedBackDao feedBackDao = new FeedBackHibernate();
+//        System.out.println(feedBackDao.getFeedBackInHotel(1l));
 //        System.out.println(feedBackDao.getFeedBackInHotelStars(1l,3));
 
 
 //        addAmenities();
-        AmenitiesDao amenitiesDao = new AmenitiesHibernate();
-        System.out.println(amenitiesDao.getAmenities(1l));
+//        AmenitiesDao amenitiesDao = new AmenitiesHibernate();
+//        System.out.println(amenitiesDao.getAmenities(1l));
 
 
 //        PersonDao personDao = new PersonHibernate();
 //        System.out.println(personDao.findPersonNameAndSurName(9l,"Никита","Вдовенков"));
 //        System.out.println(personDao.getPerson(9l));
 //        System.out.println(personDao.getPersonPost(9l,Post.Manager));
+    }
+
+    private static void addRoom() {
+        RoomRequest room = new RoomRequest();
+        room.setPrice(new BigDecimal(500));
+        room.setNumber("213");
+        room.setPrice(new BigDecimal(500));
+        room.setFloor(3);
+        RoomService roomService = new RoomService(new RoomHibernate(),new HotelHibernate(),new RoomMapper());
+        roomService.add(1l,room);
     }
 
     private static void addClient() {
@@ -101,24 +120,27 @@ public class Main {
         person.setSalary(new BigDecimal(500));
         person.setDateStart(LocalDate.now());
         person.setDateEnd(null);
-        personDao.addPerson(9l,person);
+        personDao.addPerson(9l, person);
         return person;
     }
+
     private static void addFeedBack() {
         FeedBackDao feedBackDao = new FeedBackHibernate();
         FeedBack feedBack = new FeedBack();
         feedBack.setStars(2);
         feedBack.setComment("Относительно неплохой отель");
-        feedBackDao.add(1l,feedBack);
+        feedBackDao.add(1l, feedBack);
     }
+
     private static void addAmenities() {
         AmenitiesDao amenitiesDao = new AmenitiesHibernate();
         Amenities amenities = new Amenities();
         amenities.setName("Бассей");
         amenities.setType(AmenitiesType.BATHROOM);
         amenities.setPrice(new BigDecimal(500));
-        amenitiesDao.addAmenities(1l,amenities);
+        amenitiesDao.addAmenities(1l, amenities);
     }
+
     private static void addAdministration() {
 
     }
