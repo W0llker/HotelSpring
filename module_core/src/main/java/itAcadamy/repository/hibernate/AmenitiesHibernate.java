@@ -6,6 +6,7 @@ import itAcadamy.entity.AmenitiesType;
 import itAcadamy.entity.Hotel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import itAcadamy.repository.AmenitiesDao;
 
@@ -17,6 +18,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 @Repository
 public class AmenitiesHibernate implements AmenitiesDao {
+    @Autowired
     private SessionFactory sessionFactory;
 
     public AmenitiesHibernate() {

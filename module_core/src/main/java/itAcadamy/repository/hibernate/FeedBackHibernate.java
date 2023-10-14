@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -20,6 +21,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 @Repository
 public class FeedBackHibernate implements FeedBackDao {
+    @Autowired
     private final SessionFactory sessionFactory;
 
     public FeedBackHibernate() {

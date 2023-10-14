@@ -4,11 +4,13 @@ import itAcadamy.config.ApplicationContext;
 import itAcadamy.entity.Hotel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import itAcadamy.repository.HotelDao;
 
 @Repository
 public class HotelHibernate implements HotelDao {
+    @Autowired
     private final SessionFactory sessionFactory;
 
     public HotelHibernate() {

@@ -7,12 +7,14 @@ import itAcadamy.entity.Post;
 import itAcadamy.repository.PersonDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import java.util.List;
 @Repository
 public class PersonHibernate implements PersonDao {
+    @Autowired
     private SessionFactory sessionFactory;
     public PersonHibernate() {
         this.sessionFactory = ApplicationContext.getSessionFactory();

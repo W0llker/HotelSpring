@@ -5,6 +5,7 @@ import itAcadamy.entity.Client;
 import itAcadamy.entity.ClientStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import itAcadamy.repository.ClientDao;
 
@@ -15,6 +16,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 @Repository
 public class ClientHibernate implements ClientDao {
+    @Autowired
     private final SessionFactory sessionFactory;
 
     public ClientHibernate() {
