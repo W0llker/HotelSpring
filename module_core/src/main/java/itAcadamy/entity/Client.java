@@ -18,5 +18,6 @@ public class Client extends User {
     @Enumerated(EnumType.STRING)
     private ClientStatus clientStatus;
     private BigDecimal moneySpent;
+    @Embedded
     private Address address;
 }

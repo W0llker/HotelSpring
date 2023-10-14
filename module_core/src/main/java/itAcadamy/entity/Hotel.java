@@ -22,6 +22,7 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="hotel_sq")
     private Long id;
     private String name;
+    @Embedded
     private Address address;
     // ?Лишнее?
     private Integer floor;
