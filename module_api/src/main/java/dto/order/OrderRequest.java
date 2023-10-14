@@ -1,4 +1,4 @@
-package dto.client;
+package dto.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,9 +8,9 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientResponse {
-    private String login;
-    private String name;
-    private String surName;
-    private LocalDate dateOfBirth;
+public class OrderRequest {
+    private Long clientId;
+    private Long hotelId;
+    private LocalDate start;
+    private LocalDate end;
 }
