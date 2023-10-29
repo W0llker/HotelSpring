@@ -1,5 +1,5 @@
 package dto.hotel;
 
 public class HotelResponse {
-    //пока думаю что выводить
+    // TODO: 14.10.2023 Добавить fields
 }

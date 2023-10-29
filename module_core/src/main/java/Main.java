@@ -1,79 +1,64 @@
 
+import dto.room.RoomType;
+import itAcadamy.config.ConfigClass;
 import dto.room.RoomRequest;
-import entity.*;
 
-import mapper.RoomMapper;
-import repository.*;
-import repository.hibernate.*;
-import service.RoomService;
 
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.UserTransaction;
+import itAcadamy.entity.*;
+import itAcadamy.repository.*;
+import itAcadamy.repository.hibernate.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import itAcadamy.service.RoomService;
+import service.HotelApi;
+import service.RoomApi;
+
+
+import javax.imageio.ImageIO;
+import javax.print.DocFlavor;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
 
 
 public class Main {
     public static void main(String[] args) {
-//        RoomRequest roomRequest = new RoomRequest();
-//        roomRequest.setNumber("20А");
-//        roomRequest.setSize(2);
-//        roomRequest.setFloor(3);
-//        roomRequest.setPrice(new BigDecimal(300));
-//        RoomApi roomApi = new RoomService(new RoomHibernate(), new HotelHibernate(), new RoomMapper());
-//        roomApi.add(36l,roomRequest);
-
-
-//        RoomDao roomDao = new RoomHibernate();
-//        Room room = roomDao.findById(41l);
-//        System.out.println(room.getHotel());
-
-//        ClientDao clientDao = new ClientHibernate();
-//        clientDao.add(client);
-//        clientDao.delete(16l);
-//        User client1 = clientDao.findById(16l);
-//        System.out.println(client1);
-
-//        addClient();
-//        ClientDao clientDao = new ClientHibernate();
-//        System.out.println(clientDao.findById(1l));
-//        System.out.println(clientDao.getAllClientStatus(ClientStatus.STANDART));
-
-
-//        addHotel();
-//        addPerson();
-//        addHotel();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ConfigClass.class);
+        RoomApi roomApi = applicationContext.getBean(RoomService.class);
+        HotelApi hotelApi = applicationContext.getBean(HotelApi.class);
+        OrderDao orderDao = new OrderHibernate();
+//        addOrder();
 //        addRoom();
-        RoomDao roomDao = new RoomHibernate();
-        System.out.println(roomDao.getRoomByType(1l,RoomType.ONE));
-        System.out.println(roomDao.findById(1l));
-//        addFeedBack();
 
-//        FeedBackDao feedBackDao = new FeedBackHibernate();
-//        System.out.println(feedBackDao.getFeedBackInHotel(1l));
-//        System.out.println(feedBackDao.getFeedBackInHotelStars(1l,3));
-
-
-//        addAmenities();
-//        AmenitiesDao amenitiesDao = new AmenitiesHibernate();
-//        System.out.println(amenitiesDao.getAmenities(1l));
-
-
-//        PersonDao personDao = new PersonHibernate();
-//        System.out.println(personDao.findPersonNameAndSurName(9l,"Никита","Вдовенков"));
-//        System.out.println(personDao.getPerson(9l));
-//        System.out.println(personDao.getPersonPost(9l,Post.Manager));
     }
+    private static void addOrder() {
+        RoomDao roomDao = new RoomHibernate();
+        ClientDao clientDao = new ClientHibernate();
 
+        OrderHotel orderHotel = new OrderHotel();
+        orderHotel.setOrderType(OrderType.BOOKING);
+        orderHotel.setHotel(roomDao.findById(1l).getHotel());
+        orderHotel.setClient(clientDao.findById(1l));
+        orderHotel.setRoom(roomDao.findById(1l));
+        orderHotel.setDateStart(LocalDate.of(2020,10,20));
+        orderHotel.setDateEnd(LocalDate.of(2021,10,20));
+        OrderDao orderDao = new OrderHibernate();
+        orderDao.add(orderHotel);
+    }
     private static void addRoom() {
-        RoomRequest room = new RoomRequest();
-        room.setPrice(new BigDecimal(500));
-        room.setNumber("213");
-        room.setPrice(new BigDecimal(500));
-        room.setFloor(3);
-        RoomService roomService = new RoomService(new RoomHibernate(),new HotelHibernate(),new RoomMapper());
-        roomService.add(1l,room);
+        HotelDao hotelDao = new HotelHibernate();
+        Room room = new Room();
+        room.setNumber("1234");
+        room.setPrice(new BigDecimal(255));
+        room.setRoomType(RoomType.ONE);
+        room.setHotel(hotelDao.findById(1l));
+        RoomDao roomDao = new RoomHibernate();
+        roomDao.add(room);
     }
 
     private static void addClient() {

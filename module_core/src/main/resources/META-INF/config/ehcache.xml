@@ -3,7 +3,7 @@
 <ehcache>
     <defaultCache maxElementsInMemory="100" eternal="false"
                   timeToIdleSeconds="500" timeToLiveSeconds="1000" />
-    <cache name="entity.Room"
+    <cache name="itAcadamy.entity.Room"
            maxElementsInMemory="500"
            eternal="false"
            timeToIdleSeconds="500"
