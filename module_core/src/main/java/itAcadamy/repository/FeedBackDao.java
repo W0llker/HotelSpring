@@ -4,13 +4,7 @@ import itAcadamy.entity.FeedBack;
 
 import java.util.List;
 
-public interface FeedBackDao {
-    void add(Long hotelId, FeedBack feedBack);
-
-    void edit(Long hotelId, Long feedBackId, FeedBack feedBack);
-
-    void delete(Long hotelId, Long feedBackId);
-
+public interface FeedBackDao extends CrudOperation<FeedBack>{
     List<FeedBack> getFeedBackInHotelStars(Long hotelId, Integer stars);
 
     List<FeedBack> getFeedBackInHotel(Long hotelId);

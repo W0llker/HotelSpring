@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 
 @Entity
@@ -15,11 +16,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Table(schema = "hotel", name = "room")
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE,region = "room")
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "room")
 public class Room {
     @Id
-    @SequenceGenerator(name = "room_sq",sequenceName ="sq_room",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="room_sq")
+    @SequenceGenerator(name = "room_sq", sequenceName = "sq_room", allocationSize = 1, schema = "hotel")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_sq")
     private Long id;
     private String Number;
     @Enumerated(EnumType.STRING)

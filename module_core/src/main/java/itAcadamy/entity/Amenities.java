@@ -1,8 +1,9 @@
 package itAcadamy.entity;
 
+import dto.amenities.AmenitiesType;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 @Entity
 @Data

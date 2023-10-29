@@ -1,9 +1,9 @@
 package itAcadamy.repository.hibernate;
 
-import itAcadamy.config.ApplicationContext;
 import itAcadamy.entity.FeedBack;
 import itAcadamy.entity.Hotel;
 import itAcadamy.repository.FeedBackDao;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,49 +12,24 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+
 import java.util.List;
+
 @Repository
-public class FeedBackHibernate implements FeedBackDao {
+public class FeedBackHibernate extends BaseCrudOperationHotel<FeedBack> implements FeedBackDao {
     @Autowired
-    private final SessionFactory sessionFactory;
-
-    public FeedBackHibernate() {
-        sessionFactory = ApplicationContext.getSessionFactory();
-    }
-
-    @Override
-    public void add(Long hotelId, FeedBack feedBack) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        Hotel hotel = (Hotel) session.createQuery("select h from Hotel h where h.id=:id")
-                .setParameter("id", hotelId).getSingleResult();
-        feedBack.setHotel(hotel);
-//        feedBack.setClient();
-        hotel.getFeedBacks().add(feedBack);
-        session.persist(feedBack);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    @Override
-    public void edit(Long hotelId, Long feedBackId, FeedBack feedBack) {
-        // TODO: 13.10.2023  
-    }
-
-    @Override
-    public void delete(Long hotelId, Long feedBackId) {
-        // TODO: 13.10.2023  
+    public FeedBackHibernate(SessionFactory sessionFactory, Session session) {
+        super(sessionFactory, session);
     }
 
     @Override
     public List<FeedBack> getFeedBackInHotelStars(Long hotelId, Integer stars) {
-        Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<FeedBack> criteriaQuery = cb.createQuery(FeedBack.class);
         Root<FeedBack> root = criteriaQuery.from(FeedBack.class);
@@ -68,7 +43,6 @@ public class FeedBackHibernate implements FeedBackDao {
 
     @Override
     public List<FeedBack> getFeedBackInHotelUser(Long hotelId, Long UserId) {
-        Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<FeedBack> criteriaQuery = cb.createQuery(FeedBack.class);
         Root<FeedBack> root = criteriaQuery.from(FeedBack.class);
@@ -83,7 +57,7 @@ public class FeedBackHibernate implements FeedBackDao {
     @Override
     public List<FeedBack> getFeedBackInHotel(Long hotelId) {
         DetachedCriteria detached = DetachedCriteria.forClass(FeedBack.class);
-        detached.add(Restrictions.eq("hotel.id",hotelId));
+        detached.add(Restrictions.eq("hotel.id", hotelId));
         EntityManager entityManager = sessionFactory.createEntityManager();
         Session session = entityManager.unwrap(Session.class);
         Criteria criteria = detached.getExecutableCriteria(session);

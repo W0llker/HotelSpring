@@ -3,7 +3,7 @@ package itAcadamy.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)

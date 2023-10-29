@@ -2,11 +2,15 @@ package itAcadamy.service;
 
 import dto.client.ClientRequest;
 import dto.client.ClientResponse;
+import dto.feedback.FeedBackRequest;
+import itAcadamy.aspect.CustomTransaction;
 import itAcadamy.entity.Client;
+import itAcadamy.entity.FeedBack;
 import itAcadamy.mapper.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import itAcadamy.repository.ClientDao;
+import org.springframework.transaction.annotation.Transactional;
 import service.ClientApi;
 
 @Service
@@ -17,28 +21,26 @@ public class ClientService implements ClientApi {
     private ClientMapper clientMapper;
 
     @Override
+    @CustomTransaction
     public void add(ClientRequest clientRequest) {
         clientDao.add(clientMapper.createEntity(clientRequest));
     }
 
     @Override
-    public void delete(Long id) {
-        clientDao.delete(id);
+    @CustomTransaction
+    public void delete(ClientRequest clientRequest) {
+        clientDao.delete(clientMapper.createEntity(clientRequest));
     }
 
     @Override
-    public void update(Long id, ClientRequest clientRequest) {
-        clientDao.update(id, clientMapper.createEntity(clientRequest));
-    }
-
-    @Override
-    public void addFeedbackInOrder(Long orderId) {
-        
+    @CustomTransaction
+    public void update(ClientRequest clientRequest) {
+        clientDao.update(clientMapper.createEntity(clientRequest));
     }
 
     @Override
     public ClientResponse findById(Long id) {
-        Client client = clientDao.findById(id);
+        Client client = clientDao.findById(id, Client.class);
         if (client == null) {
             throw new RuntimeException("Клиент не найден");
         }

@@ -5,17 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientRequest {
+    private Long id;
     private String login;
     private String password;
     private String name;
     private String surName;
-    private LocalDate dateOfBirth;
-    private String country;
-    private String city;
-    private String street;
-    private String postalCode;
+    private Address address;
 }

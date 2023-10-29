@@ -1,4 +1,4 @@
-package itAcadamy.entity;
+package dto.amenities;
 
 public enum AmenitiesType {
     BATHROOM,

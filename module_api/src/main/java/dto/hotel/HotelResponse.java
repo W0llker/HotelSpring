@@ -1,5 +1,20 @@
 package dto.hotel;
 
+import dto.client.Address;
+import jakarta.persistence.Embedded;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class HotelResponse {
-    // TODO: 14.10.2023 Добавить fields
+    private Long id;
+    private String name;
+    @Embedded
+    private Address address;
+    private Integer floor;
 }
