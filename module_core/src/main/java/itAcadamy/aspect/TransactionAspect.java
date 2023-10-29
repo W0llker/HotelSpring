@@ -33,10 +33,10 @@ public class TransactionAspect {
         Object o = null;
         try {
             o = proceedingJoinPoint.proceed();
+            session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
         }
-        session.getTransaction().commit();
         session.close();
         logger.info("Транзакция закрылась");
         return o;

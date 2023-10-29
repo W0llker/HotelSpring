@@ -8,6 +8,6 @@ import itAcadamy.entity.OrderHotel;
 import itAcadamy.entity.Room;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface RoomMapper extends SupperMapper<Room, RoomRequest, RoomResponse>{
 }

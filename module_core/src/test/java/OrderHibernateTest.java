@@ -41,8 +41,8 @@ public class OrderHibernateTest {
     @Test
     public void order() {
         OrderRequest orderRequest = new OrderRequest();
-        orderRequest.setHotelId(1l);
-        orderRequest.setClientId(1l);
+//        orderRequest.setHotelId(1l);
+//        orderRequest.setClientId(1l);
         orderRequest.setStart(LocalDate.of(2020,10,20));
         orderRequest.setEnd(LocalDate.of(2021,10,20));
         assertEquals(null,hotelApi.bookRoom(orderRequest,RoomType.ONE));

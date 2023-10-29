@@ -7,6 +7,7 @@ import itAcadamy.aspect.CustomTransaction;
 import itAcadamy.entity.Client;
 import itAcadamy.entity.FeedBack;
 import itAcadamy.mapper.ClientMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import itAcadamy.repository.ClientDao;
@@ -14,11 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import service.ClientApi;
 
 @Service
+@RequiredArgsConstructor
 public class ClientService implements ClientApi {
-    @Autowired
-    private ClientDao clientDao;
-    @Autowired
-    private ClientMapper clientMapper;
+    private final ClientDao clientDao;
+    private final ClientMapper clientMapper;
 
     @Override
     @CustomTransaction

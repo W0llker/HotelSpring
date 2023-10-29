@@ -11,6 +11,6 @@ import itAcadamy.entity.Hotel;
 import itAcadamy.entity.OrderHotel;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface OrderMapper extends SupperMapper<OrderHotel, OrderRequest, OrderResponse> {
 }

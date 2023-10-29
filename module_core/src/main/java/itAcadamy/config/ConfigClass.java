@@ -3,6 +3,7 @@ package itAcadamy.config;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import itAcadamy.aspect.TransactionAspect;
+import itAcadamy.mapper.ClientMapper;
 import itAcadamy.scope.CustomScopeRegistry;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -88,12 +89,10 @@ public class ConfigClass {
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         return localContainerEntityManagerFactoryBean;
     }
-
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return jpaTransactionManager;
     }
-
 }

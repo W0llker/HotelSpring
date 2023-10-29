@@ -1,4 +1,5 @@
 
+import dto.client.Address;
 import dto.order.OrderRequest;
 import dto.room.RoomType;
 import itAcadamy.config.ConfigClass;
@@ -43,8 +44,8 @@ public class Main {
         orderRequest.setEnd(LocalDate.of(2021,10,20));
         hotelApi.bookRoom(orderRequest,RoomType.ONE);
 //        addOrder();
-        addRoom();
-
+//        addRoom();
+        addClient();
     }
     private static void addOrder() {
 //        RoomDao roomDao = new RoomHibernate();
@@ -72,23 +73,23 @@ public class Main {
     }
 
     private static void addClient() {
-//        ClientDao clientDao = new ClientHibernate();
-//        Address address = new Address();
-//        address.setCity("Гомель");
-//        address.setCountry("Беларусь");
-//        address.setStreet("Тамтам");
-//        address.setPostalCode("2025");
-//
-//        Client client = new Client();
-//        client.setName("Никита");
-//        client.setLogin("Wolker");
-//        client.setSurName("Вдовенков");
-//        client.setPassword("1234");
-//        client.setClientStatus(ClientStatus.NORMAL);
-//        client.setMoneySpent(new BigDecimal(500));
-//        client.setDateOfBirth(LocalDate.now());
-//        client.setAddress(address);
-//        clientDao.add(client);
+        ClientDao clientDao = applicationContext.getBean(ClientDao.class);
+        Address address = new Address();
+        address.setCity("Гомель");
+        address.setCountry("Беларусь");
+        address.setStreet("Тамтам");
+        address.setPostalCode("2025");
+
+        Client client = new Client();
+        client.setName("Никита");
+        client.setLogin("Wolker");
+        client.setSurName("Вдовенков");
+        client.setPassword("1234");
+        client.setClientStatus(ClientStatus.NORMAL);
+        client.setMoneySpent(new BigDecimal(500));
+        client.setDateOfBirth(LocalDate.now());
+        client.setAddress(address);
+        clientDao.add(client);
     }
 
     private static void addHotel() {
