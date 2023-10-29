@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Table(schema = "hotel",name = "user")
 public class User {
     @Id
-    @GeneratedValue(generator = "ID_GENERATOR")
+    @SequenceGenerator(name = "user_sq",sequenceName ="sq_user",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="user_sq")
     private Long id;
     private String login;
     private String password;

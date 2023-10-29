@@ -1,9 +1,6 @@
 package repository;
 
-import entity.Client;
-import entity.Hotel;
-import entity.Person;
-import entity.Post;
+import entity.*;
 
 import java.util.List;
 

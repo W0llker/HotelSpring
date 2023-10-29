@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,9 +14,12 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @Table(schema = "hotel", name = "room")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE,region = "room")
 public class Room {
     @Id
-    @GeneratedValue(generator = "ID_GENERATOR")
+    @SequenceGenerator(name = "room_sq",sequenceName ="sq_room",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="room_sq")
     private Long id;
     private String Number;
     @Enumerated(EnumType.STRING)

@@ -1,8 +1,6 @@
 package entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Parent;
 
 import javax.persistence.*;
@@ -13,7 +11,8 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class Amenities {
     @Id
-    @GeneratedValue(generator = "ID_GENERATOR")
+    @SequenceGenerator(name = "amenities_sq",sequenceName ="sq_amenities",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="amenities_sq")
     private Long id;
     @Enumerated(EnumType.STRING)
     private AmenitiesType type;
@@ -21,5 +20,7 @@ public class Amenities {
     private BigDecimal price;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hotel_id", nullable = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Hotel hotel;
 }

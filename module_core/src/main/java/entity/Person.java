@@ -12,7 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Person {
     @Id
-    @GeneratedValue(generator = "ID_GENERATOR")
+    @SequenceGenerator(name = "person_sq",sequenceName ="sq_person",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="person_sq")
     private Long id;
     private String name;
     private String surName;
