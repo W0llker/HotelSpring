@@ -6,7 +6,5 @@ import itAcadamy.entity.Hotel;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface HotelMapper {
-    Hotel createEntity(HotelRequest hotelRequest);
-    HotelResponse createResponse(Hotel hotel);
+public interface HotelMapper extends SupperMapper<Hotel, HotelRequest, HotelResponse> {
 }

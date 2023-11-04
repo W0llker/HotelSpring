@@ -1,14 +1,12 @@
 package itAcadamy.repository;
 
 import itAcadamy.entity.Person;
-import itAcadamy.entity.Post;
+import dto.person.Post;
 
 import java.util.List;
 
-public interface PersonDao {
-    void addPerson(Long idHotel, Person person);
-
-    void deletePerson(Long idHotel, Long idPerson);
+// TODO: 22.10.2023 Spring data
+public interface PersonDao extends CrudOperation<Person>{
 
     List<Person> getPerson(Long idHotel);
 
@@ -16,5 +14,4 @@ public interface PersonDao {
 
     Person findPersonNameAndSurName(Long idHotel, String name, String surName);
 
-    void update(Long idHotel, Long idPerson, Person person);
 }

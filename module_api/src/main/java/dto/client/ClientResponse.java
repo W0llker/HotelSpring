@@ -9,8 +9,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClientResponse {
+    private Long id;
     private String login;
+    private String password;
     private String name;
     private String surName;
-    private LocalDate dateOfBirth;
+    private Address address;
 }

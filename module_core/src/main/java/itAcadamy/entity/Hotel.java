@@ -1,15 +1,16 @@
 package itAcadamy.entity;
 
+import dto.client.Address;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.*;
 
-import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import java.util.*;
 
 @Entity
@@ -24,7 +25,6 @@ public class Hotel {
     private String name;
     @Embedded
     private Address address;
-    // ?Лишнее?
     private Integer floor;
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
@@ -43,7 +43,7 @@ public class Hotel {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<Amenities> amenitiesList = new ArrayList<>();
-    @OneToMany(mappedBy = "hotel")
+    @OneToMany(mappedBy = "hotel",cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<Person> personList = new ArrayList<>();

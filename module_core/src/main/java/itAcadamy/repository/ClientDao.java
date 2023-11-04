@@ -6,10 +6,6 @@ import itAcadamy.entity.ClientStatus;
 
 import java.util.List;
 
-public interface ClientDao {
-    void add(Client client);
-    void delete(Long id);
-    void update(Long id,Client client);
-    Client findById(Long id);
+public interface ClientDao extends CrudOperation<Client> {
     List<Client> getAllClientStatus(ClientStatus clientStatus);
 }

@@ -14,11 +14,14 @@ public interface HotelApi {
     void delete(Long id);
 
     void addImageHotel(Long hotelId, String name, String urlImage);
-    void deleteImageHotel(Long hotelId,String name);
+
+    void deleteImageHotel(Long hotelId, String name);
+
     OrderResponse bookRoom(OrderRequest orderRequest, RoomType roomType);
-    int createOrder(Long hotelId,Long clientId);
+
+    int createOrder(Long hotelId, Long clientId);
 
     HotelResponse findById(Long id);
 
-    void update(Long id, HotelRequest hotelRequest);
+    void update(HotelRequest hotelRequest);
 }

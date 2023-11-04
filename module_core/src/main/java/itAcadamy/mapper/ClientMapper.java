@@ -6,8 +6,5 @@ import itAcadamy.entity.Client;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface ClientMapper {
-    Client createEntity(ClientRequest req);
-
-    ClientResponse createResponse(Client client);
+public interface ClientMapper extends SupperMapper<Client, ClientRequest, ClientResponse> {
 }

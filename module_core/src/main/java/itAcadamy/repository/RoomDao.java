@@ -5,16 +5,9 @@ import dto.room.RoomType;
 
 import java.util.List;
 
-public interface RoomDao {
-    void add(Room room);
-
-    void delete(Long id);
-
-    void update(Long id, Room room);
-
+public interface RoomDao extends CrudOperation<Room> {
     List<Room> getRoomByType(Long hotelId, RoomType roomType);
 
     List<Room> getRoomNotIncludedIds(List<Long> rooms, RoomType roomType, Long hotelId);
 
-    Room findById(Long id);
 }

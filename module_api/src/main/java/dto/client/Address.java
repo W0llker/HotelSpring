@@ -1,10 +1,10 @@
-package itAcadamy.entity;
+package dto.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Embeddable
 @Data

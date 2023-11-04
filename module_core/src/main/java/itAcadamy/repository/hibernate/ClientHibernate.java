@@ -1,79 +1,38 @@
 package itAcadamy.repository.hibernate;
 
-import itAcadamy.config.ApplicationContext;
+
 import itAcadamy.entity.Client;
 import itAcadamy.entity.ClientStatus;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import itAcadamy.repository.ClientDao;
 
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import java.util.List;
+
 @Repository
-public class ClientHibernate implements ClientDao {
+public class ClientHibernate extends BaseCrudOperationHotel<Client> implements ClientDao {
+
     @Autowired
-    private final SessionFactory sessionFactory;
-
-    public ClientHibernate() {
-        this.sessionFactory = ApplicationContext.getSessionFactory();
-    }
-
-    @Override
-    public void add(Client client) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        session.persist(client);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    @Override
-    public void delete(Long id) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        Client client = session.find(Client.class,id);
-        session.delete(client);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    @Override
-    public void update(Long id, Client client) {
-        Session session = sessionFactory.openSession();
-        session.getTransaction().begin();
-        client.setId(id);
-        session.update(client);
-        session.getTransaction().commit();
-    }
-
-    @Override
-    public Client findById(Long id) {
-        Session session = sessionFactory.openSession();
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Client> criteriaQuery = cb.createQuery(Client.class);
-        Root<Client> root = criteriaQuery.from(Client.class);
-        criteriaQuery.select(root).where(cb.equal(
-                root.get("id"),cb.parameter(Long.class,"id")));
-        TypedQuery<Client>  clientTypedQuery = session.createQuery(criteriaQuery)
-                .setParameter("id",id);
-        return clientTypedQuery.getSingleResult();
+    public ClientHibernate(SessionFactory sessionFactory, Session session) {
+        super(sessionFactory, session);
     }
 
     @Override
     public List<Client> getAllClientStatus(ClientStatus clientStatus) {
-        Session session = sessionFactory.openSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Client> criteriaQuery = cb.createQuery(Client.class);
         Root<Client> root = criteriaQuery.from(Client.class);
         criteriaQuery.select(root).where(cb.equal(
-                root.get("clientStatus"),cb.parameter(ClientStatus.class,"status")));
-        TypedQuery<Client>  clientTypedQuery = session.createQuery(criteriaQuery)
-                .setParameter("status",clientStatus);
+                root.get("clientStatus"), cb.parameter(ClientStatus.class, "status")));
+        TypedQuery<Client> clientTypedQuery = session.createQuery(criteriaQuery)
+                .setParameter("status", clientStatus);
         return clientTypedQuery.getResultList();
     }
 }

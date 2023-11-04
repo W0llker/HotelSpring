@@ -7,9 +7,7 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface OrderDao {
-    void add(OrderHotel order);
-    void editOrder(Long idOrder,OrderHotel order);
-    void deleteOrder(Long idOrder);
+public interface OrderDao extends CrudOperation<OrderHotel>{
+
     List<Long> getOrderInTheData(RoomType roomType, LocalDate start,LocalDate end);
 }
