@@ -15,10 +15,12 @@ import java.util.logging.Logger;
 @Service
 public class EmailService {
     private JavaMailSender javaMailSender;
+
     @Autowired
     public EmailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
+
     public void sendOrderToMail(OrderHotel orderHotel) {
         try {
             PatternMessageEmail patternMessageEmail = new PatternMessageEmail(orderHotel);
@@ -31,7 +33,7 @@ public class EmailService {
             javaMailSender.send(mimeMessage);
             log.info("Сообщение отправленно");
         } catch (Exception e) {
-//            throw new EmailException("Сообщение не дошло");
+            throw new EmailException("Сообщение не дошло");
         }
     }
 }

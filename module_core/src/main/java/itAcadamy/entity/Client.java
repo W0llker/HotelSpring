@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 public class Client extends User {
     private LocalDate dateOfBirth;
     @Enumerated(EnumType.STRING)
-    private ClientStatus clientStatus = ClientStatus.NORMAL;
+    private ClientStatus clientStatus;
     private BigDecimal moneySpent = new BigDecimal(0);
     private String email;
     @Embedded

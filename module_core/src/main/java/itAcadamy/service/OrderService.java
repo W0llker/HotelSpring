@@ -15,9 +15,7 @@ import itAcadamy.repository.ClientDao;
 import itAcadamy.repository.OrderDao;
 import itAcadamy.repository.RoomDao;
 import jakarta.transaction.Transactional;
-import mapper.SupperMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import service.CrudService;
@@ -60,6 +58,15 @@ public class OrderService extends CrudService<OrderHotel, OrderRequest, OrderRes
     @Override
     public List<OrderResponse> getAllOrderByClient(Long idClient) {
         return orderDao.getAllOrderByClientId(idClient).stream().map(orderMapper::createResponse).collect(Collectors.toList());
+    }
+
+    @Override
+    public BigDecimal checkFreeRooms(OrderRequest orderRequest) {
+        List<Room> roomsFree = getRoomsFree(orderRequest, orderRequest.getRoomType());
+        if (roomsFree.size() == 0) throw new RuntimeException("Все комнаты заняты");
+        OrderHotel orderHotel = orderMapper.createEntity(orderRequest);
+        orderHotel.setRoom(roomsFree.get(0));
+        return getCost(orderHotel);
     }
 
     @Override
@@ -122,15 +129,6 @@ public class OrderService extends CrudService<OrderHotel, OrderRequest, OrderRes
                 orderDao.save(orderHotel);
             }
         }
-    }
-
-    @Override
-    public BigDecimal checkFreeRooms(OrderRequest orderRequest) {
-        List<Room> roomsFree = getRoomsFree(orderRequest, orderRequest.getRoomType());
-        if (roomsFree.size() == 0) throw new RuntimeException("Все комнаты заняты");
-        OrderHotel orderHotel = orderMapper.createEntity(orderRequest);
-        orderHotel.setRoom(roomsFree.get(0));
-        return getCost(orderHotel);
     }
 
     private List<Room> getRoomsFree(OrderRequest orderRequest, RoomType roomType) {

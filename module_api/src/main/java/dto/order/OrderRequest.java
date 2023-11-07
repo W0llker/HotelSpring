@@ -5,6 +5,8 @@ import dto.client.ClientRequest;
 import dto.hotel.HotelRequest;
 import dto.room.RoomRequest;
 import dto.room.RoomType;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.Future;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +26,6 @@ public class OrderRequest {
     private RoomType roomType;
     private List<AmenitiesRequest> amenitiesRequestList;
     private LocalDate dateStart;
+    @Future
     private LocalDate dateEnd;
 }
