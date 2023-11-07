@@ -1,12 +1,14 @@
 package service;
 
 
+import dto.order.OrderRequest;
 import dto.room.RoomRequest;
 import dto.room.RoomResponse;
+import dto.room.RoomType;
+
+import java.util.List;
 
 public interface RoomApi {
-    void add(Long hotel_id, RoomRequest roomRequest);
-    void delete(RoomRequest roomRequest);
-    void update(Long id, RoomRequest roomRequest);
-    RoomResponse findById(Long id);
+    List<RoomResponse> getRoomByType(RoomRequest roomRequest);
+    List<RoomResponse> getRoomNotIncludedIds(OrderRequest orderRequest, RoomRequest roomRequest);
 }

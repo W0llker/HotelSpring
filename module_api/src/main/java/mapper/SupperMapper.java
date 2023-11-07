@@ -1,4 +1,4 @@
-package itAcadamy.mapper;
+package mapper;
 
 public interface SupperMapper<E, REQ, RESP> {
     E createEntity(REQ req);

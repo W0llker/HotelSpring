@@ -8,13 +8,15 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import lombok.ToString;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-@Table(schema = "hotel", name = "orderhotel")
+@Table(name = "order_hotel")
 public class OrderHotel {
     @Id
     @SequenceGenerator(name = "order_seq", sequenceName = "seq_order", allocationSize = 1)
@@ -22,9 +24,15 @@ public class OrderHotel {
     private Long id;
     @Enumerated(EnumType.STRING)
     private OrderType orderType;
-    @OneToMany
-    private List<Room> room;
     @OneToOne
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Room room;
+    @OneToMany
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<Amenities> amenities;
+    @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -35,7 +43,10 @@ public class OrderHotel {
     @ToString.Exclude
     private Hotel hotel;
     @OneToOne
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private FeedBack feedBack;
     private LocalDate dateStart;
     private LocalDate dateEnd;
+    private BigDecimal price;
 }

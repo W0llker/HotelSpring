@@ -1,53 +1,50 @@
 package itAcadamy.service;
 
+import dto.order.OrderRequest;
 import dto.room.RoomRequest;
 import dto.room.RoomResponse;
-import itAcadamy.aspect.CustomTransaction;
-import itAcadamy.entity.Hotel;
+import dto.room.RoomType;
 import itAcadamy.entity.Room;
 import itAcadamy.mapper.RoomMapper;
+import itAcadamy.repository.OrderDao;
 import itAcadamy.repository.RoomDao;
-import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import itAcadamy.repository.HotelDao;
+import service.CrudService;
 import service.RoomApi;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
-@RequiredArgsConstructor
-public class RoomService implements RoomApi {
+public class RoomService extends CrudService<Room, RoomRequest, RoomResponse> implements RoomApi {
 
     private final RoomDao roomDao;
 
     private final HotelDao hotelDao;
+    private final OrderDao orderDao;
 
     private final RoomMapper roomMapper;
 
-
-    @Override
-    @CustomTransaction
-    public void add(Long hotel_id, RoomRequest roomRequest) {
-        Room room = roomMapper.createEntity(roomRequest);
-        room.setHotel(hotelDao.findById(hotel_id, Hotel.class));
-        roomDao.add(room);
+    @Autowired
+    public RoomService(RoomDao roomDao, HotelDao hotelDao, RoomMapper roomMapper, OrderDao orderDao) {
+        super(roomMapper, roomDao);
+        this.roomDao = roomDao;
+        this.hotelDao = hotelDao;
+        this.roomMapper = roomMapper;
+        this.orderDao = orderDao;
     }
 
     @Override
-    @CustomTransaction
-    public void update(Long id, RoomRequest roomRequest) {
-        roomDao.update(roomMapper.createEntity(roomRequest));
+    public List<RoomResponse> getRoomByType(RoomRequest roomRequest) {
+        return roomDao.getRoomByType(roomRequest.getHotel().getId(), roomRequest.getRoomType()).stream().map(roomMapper::createResponse).collect(Collectors.toList());
     }
 
     @Override
-    @CustomTransaction
-    public RoomResponse findById(Long id) {
-        return roomMapper.createResponse(roomDao.findById(id, Room.class));
-    }
-
-    @Override
-    @CustomTransaction
-    public void delete(RoomRequest roomRequest) {
-        roomDao.delete(roomMapper.createEntity(roomRequest));
+    public List<RoomResponse> getRoomNotIncludedIds(OrderRequest orderRequest, RoomRequest roomRequest) {
+        return roomDao.getRoomNotIncludedIds(orderDao.getOrderInTheData(roomRequest.getRoomType(), orderRequest.getDateStart(), orderRequest.getDateEnd()),
+                        roomRequest.getRoomType(), roomRequest.getHotel().getId()).stream()
+                .map(roomMapper::createResponse).collect(Collectors.toList());
     }
 }

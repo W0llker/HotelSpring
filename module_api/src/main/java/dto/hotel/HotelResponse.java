@@ -1,7 +1,6 @@
 package dto.hotel;
 
-import dto.client.Address;
-import jakarta.persistence.Embedded;
+import dto.address.AddressResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,5 @@ import lombok.ToString;
 public class HotelResponse {
     private Long id;
     private String name;
-    @Embedded
-    private Address address;
-    private Integer floor;
+    private AddressResponse address;
 }

@@ -2,15 +2,13 @@ package service;
 
 import dto.client.ClientRequest;
 import dto.client.ClientResponse;
+import dto.client.ClientStatus;
 import dto.feedback.FeedBackRequest;
 import dto.feedback.FeedBackResponse;
 
+import java.util.List;
+
 public interface ClientApi {
-    void add(ClientRequest clientRequest);
-
-    void delete(ClientRequest clientRequest);
-
-    void update(ClientRequest clientRequest);
-
-    ClientResponse findById(Long id);
+    List<ClientResponse> getAllClientStatus(ClientStatus clientStatus);
+    List<ClientResponse> getClientByNameSurName(ClientRequest clientRequest);
 }

@@ -17,36 +17,36 @@ import jakarta.persistence.criteria.Root;
 
 import java.util.List;
 
-@Repository
-public class AmenitiesHibernate extends BaseCrudOperationHotel<Amenities> implements AmenitiesDao {
-    @Autowired
-    public AmenitiesHibernate(SessionFactory sessionFactory, Session session) {
-        super(sessionFactory, session);
-    }
-
-    @Override
-    public List<Amenities> getAmenitiesByName(Long idHotel, String name) {
-        Query query = session.createQuery("select a from Amenities a where a.hotel.id=:id and a.name=:name");
-        query.setParameter("id", idHotel);
-        query.setParameter("name", name);
-        return query.getResultList();
-    }
-
-    @Override
-    public List<Amenities> getAmenitiesType(Long idHotel, AmenitiesType amenitiesType) {
-        Query query = session.createQuery("select a from Amenities a where a.hotel.id=:id and a.name=:type");
-        query.setParameter("id", idHotel);
-        query.setParameter("type", amenitiesType);
-        return query.getResultList();
-    }
-
-    @Override
-    public List<Amenities> getAmenities(Long idHotel) {
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Amenities> query = cb.createQuery(Amenities.class);
-        Root<Amenities> root = query.from(Amenities.class);
-        Join<Hotel, Amenities> join = root.join("hotel");
-        query.where(cb.equal(join.get("id"), idHotel));
-        return session.createQuery(query).getResultList();
-    }
-}
+//@Repository
+//public class AmenitiesHibernate extends BaseCrudOperationHotel<Amenities> implements AmenitiesDao {
+//    @Autowired
+//    public AmenitiesHibernate(SessionFactory sessionFactory, Session session) {
+//        super(sessionFactory, session);
+//    }
+//
+//    @Override
+//    public List<Amenities> getAmenitiesByName(Long idHotel, String name) {
+//        Query query = session.createQuery("select a from Amenities a where a.hotel.id=:id and a.name=:name");
+//        query.setParameter("id", idHotel);
+//        query.setParameter("name", name);
+//        return query.getResultList();
+//    }
+//
+//    @Override
+//    public List<Amenities> getAmenitiesType(Long idHotel, AmenitiesType amenitiesType) {
+//        Query query = session.createQuery("select a from Amenities a where a.hotel.id=:id and a.name=:type");
+//        query.setParameter("id", idHotel);
+//        query.setParameter("type", amenitiesType);
+//        return query.getResultList();
+//    }
+//
+//    @Override
+//    public List<Amenities> getAmenities(Long idHotel) {
+//        CriteriaBuilder cb = session.getCriteriaBuilder();
+//        CriteriaQuery<Amenities> query = cb.createQuery(Amenities.class);
+//        Root<Amenities> root = query.from(Amenities.class);
+//        Join<Hotel, Amenities> join = root.join("hotel");
+//        query.where(cb.equal(join.get("id"), idHotel));
+//        return session.createQuery(query).getResultList();
+//    }
+//}

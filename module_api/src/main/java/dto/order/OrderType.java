@@ -2,6 +2,7 @@ package dto.order;
 
 public enum OrderType {
     NO,
-    BOOKING,
-    PAID
+    PAID,
+    PAID_AND_LIFE,
+    FINISH,
 }

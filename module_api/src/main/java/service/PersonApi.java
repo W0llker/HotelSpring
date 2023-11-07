@@ -9,10 +9,7 @@ import dto.person.Post;
 import java.util.List;
 
 public interface PersonApi {
-    void addPerson(Long hotelId, PersonRequest personRequest);
     List<PersonResponse> getAllPersonInHotel(Long idHotel);
-    List<PersonResponse> getAllPersonInHotelWithPost(Long idHotel, Post post);
-    PersonRequest findPersonById(Long idPerson);
-    void deletePerson(Long idPerson);
-    void updatePerson(PersonRequest personRequest);
+
+    List<PersonResponse> getPersonPost(Long idHotel, Post post);
 }

@@ -1,6 +1,6 @@
 package itAcadamy.entity;
 
-import dto.client.Address;
+import dto.client.ClientStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -13,12 +13,13 @@ import java.time.LocalDate;
 @Entity
 @ToString(callSuper = true)
 @NoArgsConstructor
-@Table(schema = "hotel", name = "client")
+@Table(name = "client")
 public class Client extends User {
     private LocalDate dateOfBirth;
     @Enumerated(EnumType.STRING)
-    private ClientStatus clientStatus;
-    private BigDecimal moneySpent;
+    private ClientStatus clientStatus = ClientStatus.NORMAL;
+    private BigDecimal moneySpent = new BigDecimal(0);
+    private String email;
     @Embedded
     private Address address;
 }

@@ -18,27 +18,27 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import java.util.List;
 import java.util.logging.Logger;
 
-@Aspect
-@Component
-@RequiredArgsConstructor
-public class TransactionAspect {
-    @Autowired
-    private Session session;
-    private final Logger logger = Logger.getLogger(this.getClass().getName());
-
-    @Around(value = "@annotation(CustomTransaction)")
-    public Object transaction(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        logger.info("Транзакция Открылась");
-        session.getTransaction().begin();
-        Object o = null;
-        try {
-            o = proceedingJoinPoint.proceed();
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            session.getTransaction().rollback();
-        }
-        session.close();
-        logger.info("Транзакция закрылась");
-        return o;
-    }
-}
+//@Aspect
+//@Component
+//@RequiredArgsConstructor
+//public class TransactionAspect {
+//    @Autowired
+//    private Session session;
+//    private final Logger logger = Logger.getLogger(this.getClass().getName());
+//
+//    @Around(value = "@annotation(CustomTransaction)")
+//    public Object transaction(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+//        logger.info("Транзакция Открылась");
+//        session.getTransaction().begin();
+//        Object o = null;
+//        try {
+//            o = proceedingJoinPoint.proceed();
+//            session.getTransaction().commit();
+//        } catch (Exception e) {
+//            session.getTransaction().rollback();
+//        }
+//        session.close();
+//        logger.info("Транзакция закрылась");
+//        return o;
+//    }
+//}

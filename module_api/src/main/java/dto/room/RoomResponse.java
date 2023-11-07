@@ -16,6 +16,5 @@ public class RoomResponse {
     private Long id;
     private String Number;
     private RoomType roomType;
-    private Integer floor;
     private BigDecimal price;
 }
