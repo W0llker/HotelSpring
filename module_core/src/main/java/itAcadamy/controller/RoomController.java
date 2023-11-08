@@ -14,7 +14,7 @@ import service.RoomApi;
 import java.util.List;
 @RestController
 @RequestMapping("room")
-public class RoomController extends CrudController<Room, RoomRequest, RoomResponse> implements RoomControllerApi {
+public class RoomController extends CrudController<RoomRequest, RoomResponse> implements RoomControllerApi {
     private final RoomApi roomApi;
     public RoomController(RoomService roomApi) {
         super(roomApi);

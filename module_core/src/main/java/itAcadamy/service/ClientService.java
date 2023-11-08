@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ClientService extends CrudService<Client, ClientRequest, ClientResponse> implements ClientApi {
+public class ClientService extends CrudService<Client,ClientRequest, ClientResponse> implements ClientApi {
     private final ClientMapper clientMapper;
     private final ClientDao clientDao;
     @Autowired

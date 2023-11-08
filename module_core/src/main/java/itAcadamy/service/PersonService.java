@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PersonService extends CrudService<Person, PersonRequest, PersonResponse> implements PersonApi {
+public class PersonService extends CrudService<Person,PersonRequest, PersonResponse> implements PersonApi {
     private final PersonMapper personMapper;
     private final PersonDao personDao;
 

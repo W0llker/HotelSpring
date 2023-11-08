@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("hotel")
-public class HotelController extends CrudController<Hotel, HotelRequest, HotelResponse> implements HotelControllerApi {
+public class HotelController extends CrudController<HotelRequest, HotelResponse> implements HotelControllerApi {
     private final HotelApi hotelApi;
     @Autowired
     public HotelController(HotelService hotelApi) {

@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("feedback")
-public class FeedBackController extends CrudController<FeedBack, FeedBackRequest, FeedBackResponse> implements FeedBackControllerApi {
+public class FeedBackController extends CrudController<FeedBackRequest, FeedBackResponse> implements FeedBackControllerApi {
     private final FeedBackApi feedBackApi;
     @Autowired
     public FeedBackController(FeedBackService feedBackApi) {

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class FeedBackService extends CrudService<FeedBack, FeedBackRequest, FeedBackResponse> implements FeedBackApi {
+public class FeedBackService extends CrudService<FeedBack,FeedBackRequest, FeedBackResponse> implements FeedBackApi {
     private final FeedBackDao feedBackDao;
     private final FeedBackMapper feedBackMapper;
 

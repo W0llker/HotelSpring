@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("order")
-public class OrderController extends CrudController<OrderHotel, OrderRequest, OrderResponse> implements OrderControllerApi {
+public class OrderController extends CrudController<OrderRequest, OrderResponse> implements OrderControllerApi {
     private final OrderApi orderApi;
 
     @Autowired

@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("amenities")
-public class AmenitiesController extends CrudController<Amenities, AmenitiesRequest, AmenitiesResponse> implements AmenitiesControllerApi {
+public class AmenitiesController extends CrudController<AmenitiesRequest, AmenitiesResponse> implements AmenitiesControllerApi {
     private final AmenitiesApi amenitiesService;
     @Autowired
     public AmenitiesController(AmenitiesService amenitiesService) {

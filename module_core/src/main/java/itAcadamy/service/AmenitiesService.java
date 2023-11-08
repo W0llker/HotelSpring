@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AmenitiesService extends CrudService<Amenities, AmenitiesRequest, AmenitiesResponse> implements AmenitiesApi {
+public class AmenitiesService extends CrudService<Amenities,AmenitiesRequest, AmenitiesResponse> implements AmenitiesApi {
     private final AmenitiesDao amenitiesDao;
     private final AmenitiesMapper amenitiesMapper;
 

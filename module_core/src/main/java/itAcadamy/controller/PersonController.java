@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("person")
-public class PersonController extends CrudController<Person, PersonRequest, PersonResponse> implements PersonControllerApi {
+public class PersonController extends CrudController<PersonRequest, PersonResponse> implements PersonControllerApi {
     private final PersonApi personApi;
 
     public PersonController(PersonService personApi) {

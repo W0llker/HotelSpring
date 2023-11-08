@@ -19,19 +19,15 @@ import java.util.stream.Collectors;
 
 @Service
 public class RoomService extends CrudService<Room, RoomRequest, RoomResponse> implements RoomApi {
-
     private final RoomDao roomDao;
-
-    private final HotelDao hotelDao;
     private final OrderDao orderDao;
 
     private final RoomMapper roomMapper;
 
     @Autowired
-    public RoomService(RoomDao roomDao, HotelDao hotelDao, RoomMapper roomMapper, OrderDao orderDao) {
+    public RoomService(RoomDao roomDao, RoomMapper roomMapper, OrderDao orderDao) {
         super(roomMapper, roomDao);
         this.roomDao = roomDao;
-        this.hotelDao = hotelDao;
         this.roomMapper = roomMapper;
         this.orderDao = orderDao;
     }

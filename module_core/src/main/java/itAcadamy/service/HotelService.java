@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 @Service
-public class HotelService extends CrudService<Hotel, HotelRequest, HotelResponse> implements HotelApi {
+public class HotelService extends CrudService<Hotel,HotelRequest, HotelResponse> implements HotelApi {
     private final HotelDao hotelDao;
 
     public HotelService(HotelMapper hotelMapper, HotelDao hotelDao) {

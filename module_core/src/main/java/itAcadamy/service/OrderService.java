@@ -29,7 +29,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class OrderService extends CrudService<OrderHotel, OrderRequest, OrderResponse> implements OrderApi {
+public class OrderService extends CrudService<OrderHotel,OrderRequest, OrderResponse> implements OrderApi {
     private final OrderDao orderDao;
     private final RoomDao roomDao;
     private final ClientDao clientDao;
