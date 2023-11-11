@@ -1,11 +1,9 @@
 package itAcadamy.entity;
 
-import dto.client.Address;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.*;
 
 import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
@@ -16,7 +14,7 @@ import java.util.*;
 @Entity
 @NoArgsConstructor
 @Data
-@Table(schema = "hotel", name = "hotel")
+@Table(name = "hotel")
 public class Hotel {
     @Id
     @SequenceGenerator(name = "hotel_sq",sequenceName ="sq_hotel",allocationSize = 1)
@@ -25,13 +23,11 @@ public class Hotel {
     private String name;
     @Embedded
     private Address address;
-    private Integer floor;
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<Room> roomList;
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.TRUE)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List <FeedBack> feedBacks = new ArrayList<>();

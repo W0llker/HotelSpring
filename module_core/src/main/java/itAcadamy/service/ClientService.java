@@ -2,48 +2,36 @@ package itAcadamy.service;
 
 import dto.client.ClientRequest;
 import dto.client.ClientResponse;
-import dto.feedback.FeedBackRequest;
-import itAcadamy.aspect.CustomTransaction;
+import dto.client.ClientStatus;
 import itAcadamy.entity.Client;
-import itAcadamy.entity.FeedBack;
 import itAcadamy.mapper.ClientMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import itAcadamy.repository.ClientDao;
-import org.springframework.transaction.annotation.Transactional;
 import service.ClientApi;
+import service.CrudService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
-public class ClientService implements ClientApi {
-    private final ClientDao clientDao;
+public class ClientService extends CrudService<Client,ClientRequest, ClientResponse> implements ClientApi {
     private final ClientMapper clientMapper;
-
-    @Override
-    @CustomTransaction
-    public void add(ClientRequest clientRequest) {
-        clientDao.add(clientMapper.createEntity(clientRequest));
+    private final ClientDao clientDao;
+    @Autowired
+    public ClientService(ClientMapper clientMapper, ClientDao clientDao) {
+        super(clientMapper,clientDao);
+        this.clientMapper = clientMapper;
+        this.clientDao = clientDao;
     }
 
     @Override
-    @CustomTransaction
-    public void delete(ClientRequest clientRequest) {
-        clientDao.delete(clientMapper.createEntity(clientRequest));
+    public List<ClientResponse> getAllClientStatus(ClientStatus clientStatus) {
+        return clientDao.getAllClientStatus(clientStatus).stream().map(clientMapper::createResponse).collect(Collectors.toList());
     }
 
     @Override
-    @CustomTransaction
-    public void update(ClientRequest clientRequest) {
-        clientDao.update(clientMapper.createEntity(clientRequest));
-    }
-
-    @Override
-    public ClientResponse findById(Long id) {
-        Client client = clientDao.findById(id, Client.class);
-        if (client == null) {
-            throw new RuntimeException("Клиент не найден");
-        }
-        return clientMapper.createResponse(client);
+    public List<ClientResponse> getClientByNameSurName(ClientRequest clientRequest) {
+        return clientDao.getClientByNameSurName(clientRequest.getName(), clientRequest.getSurName()).stream().map(clientMapper::createResponse).collect(Collectors.toList());
     }
 }

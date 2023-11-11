@@ -1,22 +1,24 @@
 package service;
 
-import dto.client.ClientRequest;
-import dto.client.ClientResponse;
+import dto.DeleteOrFindDto;
 import dto.order.OrderRequest;
 import dto.order.OrderResponse;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface OrderApi {
-    void add(OrderRequest orderRequest);
-
-    void delete(OrderRequest orderRequest);
-
-    void update(OrderRequest orderRequest);
-
-    OrderResponse findById(Long id);
-
     List<OrderResponse> getAllOrderByHotel(Long idHotel);
 
     List<OrderResponse> getAllOrderByClient(Long idClient);
+
+    BigDecimal checkFreeRooms(OrderRequest orderRequest);
+
+    OrderResponse orderFormation(OrderRequest orderRequest);
+
+    void paymentOrder(DeleteOrFindDto dto);
+
+    void cancelOrder(DeleteOrFindDto dto);
+
+    void updateOrder();
 }

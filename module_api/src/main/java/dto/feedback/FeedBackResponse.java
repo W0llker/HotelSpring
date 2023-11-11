@@ -1,5 +1,7 @@
 package dto.feedback;
 
+import dto.hotel.HotelResponse;
+import dto.order.OrderResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +13,8 @@ import lombok.ToString;
 @NoArgsConstructor
 public class FeedBackResponse {
     private Long id;
-    private Long hotelId;
-    private Long orderHotelId;
+    private HotelResponse hotel;
+    private OrderResponse order;
     private String comment;
     private Integer stars;
 }

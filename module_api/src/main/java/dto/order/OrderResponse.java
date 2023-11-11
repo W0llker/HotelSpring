@@ -8,13 +8,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 @Data
-@NoArgsConstructor
+@ToString
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderResponse {
     private Long id;
-    private List<RoomResponse> room;
+    private RoomResponse room;
     private OrderType orderType;
-    private BigDecimal totalPrice;
+    private BigDecimal price;
     private LocalDate dateStart;
     private LocalDate dateEnd;
 }

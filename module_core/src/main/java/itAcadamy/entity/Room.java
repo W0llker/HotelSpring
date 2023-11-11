@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(schema = "hotel", name = "room")
+@Table(name = "room")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "room")
 public class Room {
@@ -25,7 +25,6 @@ public class Room {
     private String Number;
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
-    private Integer floor;
     private BigDecimal price;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hotel_id", nullable = false)

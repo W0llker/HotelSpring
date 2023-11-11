@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @NoArgsConstructor
-@Table(schema = "hotel",name = "user")
+@Table(name = "user")
 public class User {
     @Id
     @SequenceGenerator(name = "user_sq",sequenceName ="sq_user",allocationSize = 1)
