@@ -2,7 +2,7 @@ package controller;
 
 import dto.amenities.AmenitiesRequest;
 import dto.amenities.AmenitiesResponse;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 

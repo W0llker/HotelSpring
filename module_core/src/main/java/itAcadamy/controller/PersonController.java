@@ -5,12 +5,9 @@ import controller.PersonControllerApi;
 import dto.DeleteOrFindDto;
 import dto.person.PersonRequest;
 import dto.person.PersonResponse;
-import itAcadamy.entity.Person;
 import itAcadamy.service.PersonService;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import service.CrudService;
 import service.PersonApi;
 
 import java.util.List;

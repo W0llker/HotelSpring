@@ -6,8 +6,6 @@ import dto.feedback.FeedBackResponse;
 import itAcadamy.entity.FeedBack;
 import itAcadamy.mapper.FeedBackMapper;
 import itAcadamy.repository.FeedBackDao;
-import mapper.SupperMapper;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import service.CrudService;
 import service.FeedBackApi;

@@ -6,8 +6,6 @@ import dto.person.Post;
 import itAcadamy.entity.Person;
 import itAcadamy.mapper.PersonMapper;
 import itAcadamy.repository.PersonDao;
-import mapper.SupperMapper;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import service.CrudService;
 import service.PersonApi;

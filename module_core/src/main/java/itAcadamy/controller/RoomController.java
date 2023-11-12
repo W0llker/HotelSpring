@@ -5,7 +5,6 @@ import controller.RoomControllerApi;
 import dto.order.OrderRequest;
 import dto.room.RoomRequest;
 import dto.room.RoomResponse;
-import itAcadamy.entity.Room;
 import itAcadamy.service.RoomService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

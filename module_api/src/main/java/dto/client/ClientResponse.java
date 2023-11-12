@@ -1,8 +1,6 @@
 package dto.client;
 
 import dto.address.AddressResponse;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

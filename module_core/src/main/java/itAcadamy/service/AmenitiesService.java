@@ -5,7 +5,6 @@ import dto.amenities.AmenitiesResponse;
 import dto.amenities.AmenitiesType;
 import itAcadamy.entity.Amenities;
 import itAcadamy.mapper.AmenitiesMapper;
-import mapper.SupperMapper;
 import itAcadamy.repository.AmenitiesDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

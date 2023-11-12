@@ -5,7 +5,6 @@ import controller.FeedBackControllerApi;
 import dto.DeleteOrFindDto;
 import dto.feedback.FeedBackRequest;
 import dto.feedback.FeedBackResponse;
-import itAcadamy.entity.FeedBack;
 import itAcadamy.service.FeedBackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

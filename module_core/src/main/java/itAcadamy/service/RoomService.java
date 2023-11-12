@@ -3,14 +3,12 @@ package itAcadamy.service;
 import dto.order.OrderRequest;
 import dto.room.RoomRequest;
 import dto.room.RoomResponse;
-import dto.room.RoomType;
 import itAcadamy.entity.Room;
 import itAcadamy.mapper.RoomMapper;
 import itAcadamy.repository.OrderDao;
 import itAcadamy.repository.RoomDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import itAcadamy.repository.HotelDao;
 import service.CrudService;
 import service.RoomApi;
 
