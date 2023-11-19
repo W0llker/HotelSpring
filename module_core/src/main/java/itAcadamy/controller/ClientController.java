@@ -4,6 +4,7 @@ import controller.ClientControllerApi;
 import controller.CrudController;
 import dto.client.ClientRequest;
 import dto.client.ClientResponse;
+import annotation.LoggerAnnotation;
 import itAcadamy.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +24,13 @@ public class ClientController extends CrudController<ClientRequest, ClientRespon
     }
 
     @Override
+    @LoggerAnnotation
     public List<ClientResponse> getAllClientStatus(ClientRequest clientRequest) {
         return clientService.getAllClientStatus(clientRequest.getClientStatus());
     }
 
     @Override
+    @LoggerAnnotation
     public List<ClientResponse> getClientByNameSurName(ClientRequest clientRequest) {
         return clientService.getClientByNameSurName(clientRequest);
     }

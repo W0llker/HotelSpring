@@ -1,5 +1,6 @@
 package itAcadamy.controller;
 
+import annotation.LoggerAnnotation;
 import controller.CrudController;
 import controller.HotelControllerApi;
 import dto.hotel.HotelRequest;
@@ -22,11 +23,13 @@ public class HotelController extends CrudController<HotelRequest, HotelResponse>
     }
 
     @Override
+    @LoggerAnnotation
     public void addImageInHotel(ImageRequest imageRequest) {
         hotelApi.addImageHotel(imageRequest);
     }
 
     @Override
+    @LoggerAnnotation
     public void deleteImageInHotel(ImageRequest imageRequest) {
         hotelApi.deleteImageHotel(imageRequest);
     }

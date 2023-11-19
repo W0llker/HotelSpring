@@ -12,5 +12,5 @@ public interface PersonControllerApi {
     @PostMapping("getAll")
     List<PersonResponse> getAllPersonByHotel(@RequestBody DeleteOrFindDto dto);
     @PostMapping("findPersonPost")
-    List<PersonResponse> getPersonPost(@RequestBody PersonRequest personRequest, @RequestBody DeleteOrFindDto dto);
+    List<PersonResponse> getPersonPost(@RequestBody PersonRequest personRequest);
 }

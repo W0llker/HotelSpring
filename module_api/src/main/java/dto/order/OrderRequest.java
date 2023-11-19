@@ -21,11 +21,13 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderRequest {
     private Long id;
+    @NotNull
     private ClientRequest client;
+    @NotNull
     private HotelRequest hotel;
     @NotNull
     private RoomType roomType;
-    private List<AmenitiesRequest> amenitiesRequestList;
+    private List<AmenitiesRequest> amenities;
     @Future
     private LocalDate dateStart;
     @Future

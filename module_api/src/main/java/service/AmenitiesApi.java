@@ -1,6 +1,6 @@
 package service;
 
-import dto.amenities.AmenitiesRequest;
+
 import dto.amenities.AmenitiesResponse;
 import dto.amenities.AmenitiesType;
 

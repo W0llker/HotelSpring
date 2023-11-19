@@ -6,9 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 
 @Data
 @Entity
@@ -23,4 +27,9 @@ public class Client extends User {
     private String email;
     @Embedded
     private Address address;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("USER"));
+    }
 }

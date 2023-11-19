@@ -4,20 +4,19 @@ import dto.person.Post;
 import lombok.*;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Person {
-    @Id
-    @SequenceGenerator(name = "person_sq",sequenceName ="sq_person",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="person_sq")
-    private Long id;
-    private String name;
-    private String surName;
+public class Person extends User {
     @Enumerated(EnumType.STRING)
     private Post post;
     private BigDecimal salary;
@@ -28,4 +27,10 @@ public class Person {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Hotel hotel;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(post.equals(Post.MANAGER)) {
+            return List.of(new SimpleGrantedAuthority("ADMIN"));
+        } else return List.of(new SimpleGrantedAuthority("PERSON"));
+    }
 }

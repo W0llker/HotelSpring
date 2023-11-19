@@ -1,5 +1,6 @@
 package itAcadamy.controller;
 
+import annotation.LoggerAnnotation;
 import controller.CrudController;
 import controller.OrderControllerApi;
 import dto.DeleteOrFindDto;
@@ -26,31 +27,37 @@ public class OrderController extends CrudController<OrderRequest, OrderResponse>
     }
 
     @Override
+    @LoggerAnnotation
     public List<OrderResponse> getAllOrderByHotel(DeleteOrFindDto dto) {
         return orderApi.getAllOrderByHotel(dto.getId());
     }
 
     @Override
+    @LoggerAnnotation
+    public OrderResponse save(OrderRequest orderRequest) {
+        return orderApi.orderFormation(orderRequest);
+    }
+
+    @Override
+    @LoggerAnnotation
     public List<OrderResponse> getAllOrderByClient(DeleteOrFindDto dto) {
         return orderApi.getAllOrderByClient(dto.getId());
     }
 
     @Override
+    @LoggerAnnotation
     public BigDecimal checkFreeRooms(OrderRequest orderRequest) {
         return orderApi.checkFreeRooms(orderRequest);
     }
 
     @Override
-    public OrderResponse orderFormation(OrderRequest orderRequest) {
-        return orderApi.orderFormation(orderRequest);
-    }
-
-    @Override
+    @LoggerAnnotation
     public void paymentOrder(DeleteOrFindDto dto) {
         orderApi.paymentOrder(dto);
     }
 
     @Override
+    @LoggerAnnotation
     public void cancelOrder(DeleteOrFindDto dto) {
         orderApi.cancelOrder(dto);
     }

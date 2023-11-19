@@ -1,5 +1,6 @@
 package itAcadamy.controller;
 
+import annotation.LoggerAnnotation;
 import controller.CrudController;
 import controller.FeedBackControllerApi;
 import dto.DeleteOrFindDto;
@@ -24,17 +25,20 @@ public class FeedBackController extends CrudController<FeedBackRequest, FeedBack
     }
 
     @Override
+    @LoggerAnnotation
     public List<FeedBackResponse> getFeedBackInHotel(DeleteOrFindDto dto) {
         return feedBackApi.getFeedBackInHotel(dto);
     }
 
     @Override
+    @LoggerAnnotation
     public List<FeedBackResponse> getFeedBackInHotelStars(FeedBackRequest feedBackRequest) {
         return feedBackApi.getFeedBackInHotelStars(feedBackRequest);
     }
 
     @Override
-    public List<FeedBackResponse> getFeedBackInHotelUser(FeedBackRequest feedBackRequest, DeleteOrFindDto dto) {
-        return feedBackApi.getFeedBackInHotelUser(feedBackRequest,dto);
+    @LoggerAnnotation
+    public List<FeedBackResponse> getFeedBackInHotelUser(FeedBackRequest feedBackRequest) {
+        return feedBackApi.getFeedBackInHotelUser(feedBackRequest);
     }
 }

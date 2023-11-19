@@ -1,6 +1,7 @@
 package itAcadamy.service;
 
 import dto.DeleteOrFindDto;
+import dto.amenities.AmenitiesRequest;
 import dto.client.ClientStatus;
 import dto.order.OrderRequest;
 import dto.order.OrderResponse;
@@ -12,6 +13,7 @@ import itAcadamy.entity.Room;
 import itAcadamy.exception.OrderException;
 import itAcadamy.mapper.AmenitiesMapper;
 import itAcadamy.mapper.OrderMapper;
+import itAcadamy.repository.AmenitiesDao;
 import itAcadamy.repository.ClientDao;
 import itAcadamy.repository.OrderDao;
 import itAcadamy.repository.RoomDao;
@@ -30,17 +32,18 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class OrderService extends CrudService<OrderHotel,OrderRequest, OrderResponse> implements OrderApi {
+public class OrderService extends CrudService<OrderHotel, OrderRequest, OrderResponse> implements OrderApi {
     private final OrderDao orderDao;
     private final RoomDao roomDao;
     private final ClientDao clientDao;
+    private final AmenitiesDao amenitiesDao;
     private final OrderMapper orderMapper;
     private final AmenitiesMapper amenitiesMapper;
     private final EmailService emailService;
 
     @Autowired
     public OrderService(OrderDao orderDao, RoomDao roomDao, ClientDao clientDao, OrderMapper orderMapper,
-                        AmenitiesMapper amenitiesMapper, EmailService emailService) {
+                        AmenitiesMapper amenitiesMapper, EmailService emailService, AmenitiesDao amenitiesDao) {
         super(orderMapper, orderDao);
         this.orderDao = orderDao;
         this.roomDao = roomDao;
@@ -48,10 +51,10 @@ public class OrderService extends CrudService<OrderHotel,OrderRequest, OrderResp
         this.orderMapper = orderMapper;
         this.amenitiesMapper = amenitiesMapper;
         this.emailService = emailService;
+        this.amenitiesDao = amenitiesDao;
     }
 
     @Override
-    // TODO: 06.11.2023 Переделать на пагинацию
     public List<OrderResponse> getAllOrderByHotel(Long idHotel) {
         return orderDao.getAllOrderByHotelId(idHotel).stream().map(orderMapper::createResponse).collect(Collectors.toList());
     }
@@ -62,27 +65,41 @@ public class OrderService extends CrudService<OrderHotel,OrderRequest, OrderResp
     }
 
     @Override
+    public OrderResponse update(OrderRequest orderRequest) {
+        OrderHotel order = Optional.of(orderDao.findById(orderRequest.getId()).orElseThrow(() -> new OrderException("Нету такого ордера"))).get();
+        if (order.getOrderType().equals(OrderType.NO)) {
+            return orderMapper.createResponse(orderSave(orderRequest));
+        }
+        throw new OrderException("На данный момент невозможно сделать эту операцию");
+    }
+
+    private OrderHotel orderSave(OrderRequest orderRequest) {
+        List<Room> roomsFree = getRoomsFree(orderRequest, orderRequest.getRoomType());
+        if (roomsFree.size() == 0) throw new RuntimeException("Все комнаты заняты");
+        OrderHotel orderHotel = createOrder(orderRequest);
+        orderHotel.setRoom(roomsFree.get(0));
+        if (orderRequest.getAmenities() != null) {
+            orderHotel.setAmenities(amenitiesDao.getAmenitiesByIdsWithHotel(orderRequest.getAmenities().stream().map(AmenitiesRequest::getId).collect(Collectors.toList()), orderRequest.getHotel().getId()));
+        }
+        orderHotel.setPrice(getCost(orderHotel));
+        orderDao.save(orderHotel);
+        return orderHotel;
+    }
+
+    @Override
+    @Transactional
+    public OrderResponse orderFormation(OrderRequest orderRequest) {
+        OrderHotel order = orderSave(orderRequest);
+        return orderMapper.createResponse(order);
+    }
+
+    @Override
     public BigDecimal checkFreeRooms(OrderRequest orderRequest) {
         List<Room> roomsFree = getRoomsFree(orderRequest, orderRequest.getRoomType());
         if (roomsFree.size() == 0) throw new RuntimeException("Все комнаты заняты");
         OrderHotel orderHotel = orderMapper.createEntity(orderRequest);
         orderHotel.setRoom(roomsFree.get(0));
         return getCost(orderHotel);
-    }
-
-    @Override
-    @Transactional
-    public OrderResponse orderFormation(OrderRequest orderRequest) {
-        List<Room> roomsFree = getRoomsFree(orderRequest, orderRequest.getRoomType());
-        if (roomsFree.size() == 0) throw new RuntimeException("Все комнаты заняты");
-        OrderHotel order = createOrder(orderRequest);
-        order.setRoom(roomsFree.get(0));
-        if (orderRequest.getAmenitiesRequestList() != null) {
-            order.setAmenities(orderRequest.getAmenitiesRequestList().stream().map(amenitiesMapper::createEntity).collect(Collectors.toList()));
-        }
-        order.setPrice(getCost(order));
-        orderDao.save(order);
-        return orderMapper.createResponse(order);
     }
 
     @Override
@@ -117,7 +134,7 @@ public class OrderService extends CrudService<OrderHotel,OrderRequest, OrderResp
 
     @Override
     @Transactional
-    @Scheduled(fixedRate = 15000000)
+    @Scheduled(fixedRate = 150000)
     public void updateOrder() {
         List<OrderHotel> orderHotels = orderDao.getAllOrderByOrderTypePaidOrPaidAndLife();
         for (OrderHotel orderHotel : orderHotels) {

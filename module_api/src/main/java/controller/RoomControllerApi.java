@@ -13,5 +13,5 @@ public interface RoomControllerApi {
     List<RoomResponse> getRoomByType(@RequestBody RoomRequest roomRequest);
 
     @PostMapping("findFreeRoom")
-    List<RoomResponse> findFreeRoom(@RequestBody OrderRequest orderRequest, @RequestBody RoomRequest roomRequest);
+    List<RoomResponse> findFreeRoom(@RequestBody OrderRequest orderRequest);
 }

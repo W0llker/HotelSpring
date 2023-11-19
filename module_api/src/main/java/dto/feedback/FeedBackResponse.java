@@ -14,7 +14,7 @@ import lombok.ToString;
 public class FeedBackResponse {
     private Long id;
     private HotelResponse hotel;
-    private OrderResponse order;
+    private OrderResponse orderHotel;
     private String comment;
     private Integer stars;
 }
