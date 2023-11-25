@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 public interface ClientControllerApi {
-    @PostMapping("getAll")
+    @PostMapping("getAllStatus")
     List<ClientResponse> getAllClientStatus(@RequestBody ClientRequest clientRequest);
 
     @PostMapping("findByNameSurName")

@@ -12,5 +12,5 @@ public interface ControllerApi<REQ, RESP> {
     @DeleteMapping("delete")
     void delete(@RequestBody DeleteOrFindDto dto);
     @PutMapping("update")
-    RESP update(@RequestBody REQ req);
+    RESP update(@RequestBody @Valid REQ req);
 }

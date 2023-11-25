@@ -9,5 +9,5 @@ import java.util.List;
 public interface FeedBackApi {
     List<FeedBackResponse> getFeedBackInHotelStars(FeedBackRequest feedBackRequest);
     List<FeedBackResponse> getFeedBackInHotel(DeleteOrFindDto dto);
-    List<FeedBackResponse> getFeedBackInHotelUser(FeedBackRequest feedBackRequest, DeleteOrFindDto dto);
+    List<FeedBackResponse> getFeedBackInHotelUser(FeedBackRequest feedBackRequest);
 }

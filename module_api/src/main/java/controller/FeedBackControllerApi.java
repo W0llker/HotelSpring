@@ -16,5 +16,5 @@ public interface FeedBackControllerApi {
     List<FeedBackResponse> getFeedBackInHotelStars(@RequestBody FeedBackRequest feedBackRequest);
 
     @PostMapping("findUser")
-    List<FeedBackResponse> getFeedBackInHotelUser(@RequestBody FeedBackRequest feedBackRequest, @RequestBody DeleteOrFindDto dto);
+    List<FeedBackResponse> getFeedBackInHotelUser(@RequestBody FeedBackRequest feedBackRequest);
 }

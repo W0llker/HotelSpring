@@ -1,5 +1,6 @@
 package itAcadamy.controller;
 
+import annotation.LoggerAnnotation;
 import controller.AmenitiesControllerApi;
 import controller.CrudController;
 import dto.amenities.AmenitiesRequest;
@@ -23,16 +24,19 @@ public class AmenitiesController extends CrudController<AmenitiesRequest, Amenit
     }
 
     @Override
+    @LoggerAnnotation
     public List<AmenitiesResponse> getAllAmenities(AmenitiesRequest amenitiesRequest) {
         return amenitiesService.getAllAmenitiesByHotel(amenitiesRequest.getHotel().getId());
     }
 
     @Override
+    @LoggerAnnotation
     public List<AmenitiesResponse> getAmenitiesByHotelWithType(AmenitiesRequest amenitiesRequest) {
         return amenitiesService.getAllAmenitiesByHotelWithType(amenitiesRequest.getHotel().getId(),amenitiesRequest.getType());
     }
 
     @Override
+    @LoggerAnnotation
     public List<AmenitiesResponse> getAmenitiesByName(AmenitiesRequest amenitiesRequest) {
         return amenitiesService.getAmenitiesByName(amenitiesRequest.getHotel().getId(),amenitiesRequest.getName());
     }

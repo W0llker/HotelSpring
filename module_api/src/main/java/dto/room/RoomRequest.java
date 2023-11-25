@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @ToString
 public class RoomRequest {
+    private Long id;
     private HotelRequest hotel;
     @NotBlank
     private String number;

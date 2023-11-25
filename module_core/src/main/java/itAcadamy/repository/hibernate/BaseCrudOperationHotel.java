@@ -1,9 +1,5 @@
 package itAcadamy.repository.hibernate;
 
-import itAcadamy.aspect.CustomTransaction;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
 //public abstract class BaseCrudOperationHotel<T> implements CrudOperation<T> {
 //    protected final SessionFactory sessionFactory;
 //    protected Session session;

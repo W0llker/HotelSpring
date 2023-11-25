@@ -16,7 +16,6 @@ import java.time.LocalDate;
 public class ClientResponse {
     private Long id;
     private String login;
-    private String password;
     private String name;
     private String surName;
     private LocalDate dateOfBirth;

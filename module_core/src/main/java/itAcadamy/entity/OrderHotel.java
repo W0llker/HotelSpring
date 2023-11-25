@@ -1,12 +1,9 @@
 package itAcadamy.entity;
 
 import dto.order.OrderType;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import jakarta.persistence.*;
-import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,7 +20,7 @@ public class OrderHotel {
     private Long id;
     @Enumerated(EnumType.STRING)
     private OrderType orderType;
-    @OneToOne
+    @ManyToOne
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Room room;
@@ -41,10 +38,6 @@ public class OrderHotel {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Hotel hotel;
-    @OneToOne
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private FeedBack feedBack;
     private LocalDate dateStart;
     private LocalDate dateEnd;
     private BigDecimal price;

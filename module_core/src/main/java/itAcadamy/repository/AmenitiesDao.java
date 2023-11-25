@@ -14,4 +14,6 @@ public interface AmenitiesDao extends JpaRepository<Amenities,Long> {
     List<Amenities> getAmenitiesType(Long idHotel, AmenitiesType amenitiesType);
     @Query("select a from Amenities a where a.hotel.id=:idHotel")
     List<Amenities> getAmenities(Long idHotel);
+    @Query("select a from Amenities a where a.hotel.id=:idHotel and a.id in(:idAmenities)")
+    List<Amenities> getAmenitiesByIdsWithHotel(List<Long> idAmenities,Long idHotel);
 }

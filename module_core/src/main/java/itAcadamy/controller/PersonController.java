@@ -1,5 +1,6 @@
 package itAcadamy.controller;
 
+import annotation.LoggerAnnotation;
 import controller.CrudController;
 import controller.PersonControllerApi;
 import dto.DeleteOrFindDto;
@@ -23,12 +24,14 @@ public class PersonController extends CrudController<PersonRequest, PersonRespon
     }
 
     @Override
+    @LoggerAnnotation
     public List<PersonResponse> getAllPersonByHotel(DeleteOrFindDto dto) {
         return personApi.getAllPersonInHotel(dto.getId());
     }
 
     @Override
-    public List<PersonResponse> getPersonPost(PersonRequest personRequest, DeleteOrFindDto dto) {
-        return personApi.getPersonPost(dto.getId(), personRequest.getPost());
+    @LoggerAnnotation
+    public List<PersonResponse> getPersonPost(PersonRequest personRequest) {
+        return personApi.getPersonPost(personRequest.getHotel().getId(), personRequest.getPost());
     }
 }

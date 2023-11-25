@@ -9,6 +9,7 @@ import itAcadamy.repository.OrderDao;
 import itAcadamy.repository.RoomDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ls.LSException;
 import service.CrudService;
 import service.RoomApi;
 
@@ -36,9 +37,10 @@ public class RoomService extends CrudService<Room, RoomRequest, RoomResponse> im
     }
 
     @Override
-    public List<RoomResponse> getRoomNotIncludedIds(OrderRequest orderRequest, RoomRequest roomRequest) {
-        return roomDao.getRoomNotIncludedIds(orderDao.getOrderInTheData(roomRequest.getRoomType(), orderRequest.getDateStart(), orderRequest.getDateEnd()),
-                        roomRequest.getRoomType(), roomRequest.getHotel().getId()).stream()
-                .map(roomMapper::createResponse).collect(Collectors.toList());
+    public List<RoomResponse> getRoomNotIncludedIds(OrderRequest orderRequest) {
+        List<Long> longList = orderDao.getOrderInTheData(orderRequest.getRoomType(), orderRequest.getDateStart(), orderRequest.getDateEnd());
+        longList.add(0L);
+        List<Room> rooms = roomDao.getRoomNotIncludedIds(longList,orderRequest.getRoomType(), orderRequest.getHotel().getId());
+        return rooms.stream().map(roomMapper::createResponse).collect(Collectors.toList());
     }
 }

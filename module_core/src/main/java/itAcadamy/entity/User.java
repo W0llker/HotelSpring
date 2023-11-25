@@ -4,30 +4,60 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+
 
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @NoArgsConstructor
 @Table(name = "user")
-public class User {
+public class User implements UserDetails {
     @Id
-    @SequenceGenerator(name = "user_sq",sequenceName ="sq_user",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator ="user_sq")
+    @SequenceGenerator(name = "user_sq", sequenceName = "sq_user", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sq")
     private Long id;
+    @Column(unique = true)
     private String login;
     private String password;
     private String name;
     private String surName;
 
     @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", surName='" + surName + '\'' +
-                '}';
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

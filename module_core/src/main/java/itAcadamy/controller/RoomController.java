@@ -1,5 +1,6 @@
 package itAcadamy.controller;
 
+import annotation.LoggerAnnotation;
 import controller.CrudController;
 import controller.RoomControllerApi;
 import dto.order.OrderRequest;
@@ -21,12 +22,14 @@ public class RoomController extends CrudController<RoomRequest, RoomResponse> im
     }
 
     @Override
+    @LoggerAnnotation
     public List<RoomResponse> getRoomByType(RoomRequest roomRequest) {
         return roomApi.getRoomByType(roomRequest);
     }
 
     @Override
-    public List<RoomResponse> findFreeRoom(OrderRequest orderRequest, RoomRequest roomRequest) {
-        return roomApi.getRoomNotIncludedIds(orderRequest,roomRequest);
+    @LoggerAnnotation
+    public List<RoomResponse> findFreeRoom(OrderRequest orderRequest) {
+        return roomApi.getRoomNotIncludedIds(orderRequest);
     }
 }

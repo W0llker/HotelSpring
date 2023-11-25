@@ -1,6 +1,5 @@
 package itAcadamy.repository;
 
-import dto.order.OrderResponse;
 import dto.order.OrderType;
 import dto.room.RoomType;
 import itAcadamy.entity.OrderHotel;
@@ -17,5 +16,5 @@ public interface OrderDao extends JpaRepository<OrderHotel, Long> {
     List<OrderHotel> getAllOrderByClientId(Long idClient);
     @Query("select o from OrderHotel o where o.orderType='PAID' or o.orderType='PAID_AND_LIFE'")
     List<OrderHotel> getAllOrderByOrderTypePaidOrPaidAndLife();
-    OrderHotel getOrderByOrderTypeAndClientId(OrderType orderType,Long clientId);
+//    OrderHotel getOrderByOrderTypeAndClientId(OrderType orderType,Long clientId);
 }

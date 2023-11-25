@@ -1,18 +1,5 @@
 package itAcadamy.repository.hibernate;
 
-import itAcadamy.aspect.CustomTransaction;
-import itAcadamy.entity.Person;
-import dto.person.Post;
-import itAcadamy.repository.PersonDao;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import jakarta.persistence.Query;
-
-import java.util.List;
-
 //@Repository
 //public class PersonHibernate extends BaseCrudOperationHotel<Person> implements PersonDao {
 //    @Autowired

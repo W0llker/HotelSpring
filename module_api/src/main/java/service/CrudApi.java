@@ -1,5 +1,7 @@
 package service;
 
+
+
 public interface CrudApi<REQ, RESP> {
     RESP add(REQ req);
 
