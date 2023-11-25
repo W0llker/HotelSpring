@@ -1,6 +1,5 @@
 package dto.amenities;
 
-import dto.hotel.HotelRequest;
 import dto.hotel.HotelResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;

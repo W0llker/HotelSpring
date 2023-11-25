@@ -5,7 +5,6 @@ import controller.OrderControllerApi;
 import dto.DeleteOrFindDto;
 import dto.order.OrderRequest;
 import dto.order.OrderResponse;
-import itAcadamy.entity.OrderHotel;
 import itAcadamy.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

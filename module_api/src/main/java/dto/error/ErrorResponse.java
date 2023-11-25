@@ -1,7 +1,6 @@
 package dto.error;
 
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
 @Data
 public class ErrorResponse {

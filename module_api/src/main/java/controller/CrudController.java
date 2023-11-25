@@ -2,7 +2,6 @@ package controller;
 
 import dto.DeleteOrFindDto;
 import service.CrudApi;
-import service.CrudService;
 
 public abstract class CrudController<REQ, RESP> implements ControllerApi<REQ, RESP> {
     private final CrudApi<REQ, RESP> crudService;

@@ -3,7 +3,6 @@ package controller;
 
 import dto.client.ClientRequest;
 import dto.client.ClientResponse;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 

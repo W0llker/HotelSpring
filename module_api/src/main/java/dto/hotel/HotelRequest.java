@@ -1,6 +1,7 @@
 package dto.hotel;
 
 import dto.address.AddressRequest;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Data
@@ -9,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 public class HotelRequest {
     private Long id;
+    @NotBlank
     private String name;
     private AddressRequest address;
 }

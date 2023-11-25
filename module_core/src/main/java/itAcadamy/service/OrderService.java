@@ -9,6 +9,7 @@ import dto.room.RoomType;
 import itAcadamy.entity.Client;
 import itAcadamy.entity.OrderHotel;
 import itAcadamy.entity.Room;
+import itAcadamy.exception.OrderException;
 import itAcadamy.mapper.AmenitiesMapper;
 import itAcadamy.mapper.OrderMapper;
 import itAcadamy.repository.ClientDao;
@@ -87,9 +88,9 @@ public class OrderService extends CrudService<OrderHotel,OrderRequest, OrderResp
     @Override
     @Transactional
     public void paymentOrder(DeleteOrFindDto dto) {
-        OrderHotel orderHotel = Optional.of(orderDao.findById(dto.getId()).orElseThrow(() -> new RuntimeException("Ошибка"))).get();
+        OrderHotel orderHotel = Optional.of(orderDao.findById(dto.getId()).orElseThrow(() -> new OrderException("Орден не найден"))).get();
         if (orderHotel.getOrderType() != OrderType.NO)
-            throw new RuntimeException("Ордер оплачен");
+            throw new OrderException("Ордер оплачен");
         orderHotel.setOrderType(OrderType.PAID);
         orderHotel.setPrice(getCost(orderHotel));
         Client client = orderHotel.getClient();
@@ -102,9 +103,9 @@ public class OrderService extends CrudService<OrderHotel,OrderRequest, OrderResp
     @Override
     @Transactional
     public void cancelOrder(DeleteOrFindDto dto) {
-        OrderHotel orderHotel = Optional.of(orderDao.findById(dto.getId()).orElseThrow(() -> new RuntimeException("Ошибка"))).get();
+        OrderHotel orderHotel = Optional.of(orderDao.findById(dto.getId()).orElseThrow(() -> new OrderException("Орден не найден"))).get();
         if (orderHotel.getOrderType() != OrderType.NO && orderHotel.getOrderType() != OrderType.PAID)
-            throw new RuntimeException("Ордер оплачен и не может быть отменен");
+            throw new OrderException("Ордер оплачен и не может быть отменен");
         if (orderHotel.getOrderType().equals(OrderType.PAID)) {
             //типо возвращаю деньги на карту
             Client client = orderHotel.getClient();

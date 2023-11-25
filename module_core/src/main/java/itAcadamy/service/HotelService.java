@@ -5,6 +5,8 @@ import dto.hotel.HotelRequest;
 import dto.hotel.HotelResponse;
 import dto.image.ImageRequest;
 import itAcadamy.entity.*;
+import itAcadamy.exception.HotelException;
+import itAcadamy.exception.ImageSaveException;
 import itAcadamy.mapper.HotelMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -33,12 +35,12 @@ public class HotelService extends CrudService<Hotel,HotelRequest, HotelResponse>
         if (hotel.getImage().size() > 0)
             hotel.getImage().forEach(imageHotel -> {
                 if (imageHotel.getName().equals(imageRequest.getName()))
-                    throw new RuntimeException("Данная картинка уже сохранена");
+                    throw new ImageSaveException("Данная картинка уже сохранена");
             });
         try {
             hotel.getImage().add(new ImageHotel(imageRequest.getName(), Files.readAllBytes(Paths.get(imageRequest.getUrl()))));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ImageSaveException("Ошибка сохранения");
         }
         hotelDao.save(hotel);
     }
@@ -46,7 +48,7 @@ public class HotelService extends CrudService<Hotel,HotelRequest, HotelResponse>
     @Override
     @Transactional
     public void deleteImageHotel(ImageRequest imageRequest) {
-        Hotel hotel = Optional.of(hotelDao.findById(imageRequest.getHotelRequest().getId()).orElseThrow(() -> new RuntimeException("Ошибка"))).get();
+        Hotel hotel = hotelDao.findById(imageRequest.getHotelRequest().getId()).orElseThrow(() -> new HotelException("Отель не найден"));
         hotel.getImage().removeIf(imageHotel -> imageHotel.getName().equals(imageRequest.getName()));
     }
 }
